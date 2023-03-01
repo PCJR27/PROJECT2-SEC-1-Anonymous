@@ -31,3 +31,7 @@
 
 ### เกมอับดุล ถามได้ตอบได้
 * เป็นการให้ตัวเกมเดาคนดังที่เราคิดอยู่ให้ถูก https://www.youtube.com/watch?v=Y3CEDoindiI
+
+### ผลสรุป IDEA
+![Screenshot 2566-03-01 at 21 29 24](https://user-images.githubusercontent.com/88100445/222169660-1575d9c0-c9a9-4296-a3ef-621c2950ce0b.png)
+
