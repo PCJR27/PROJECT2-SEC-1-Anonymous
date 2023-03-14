@@ -1,24 +1,32 @@
 <script setup>
 import {ref} from'vue'
+// import { play } from './components/TableGame.vue'
+// import { Random } from '../play.js'
 
-let diceRef=ref('')
-function rollDice(){
-
-    let number = Math.floor(Math.random() * 6 + 1)
-
-    if(number >= 1 && number <= 6){
-        animationRoll(number)
-    } 
-    else{
-        rollDice();
+// let randomNumber =ref(number)
+const props= defineProps({
+    randomNum:{
+        type:Number,
+        require:true
     }
+})
+let diceRef = ref('')
+let roll =rollDice()
 
-    console.log(number)
+function rollDice(){
+    let number = Math.floor(Math.random() * 6 + 1)
+if(number >= 1 && number <= 6){
+    animationRoll(number)
+} 
+else{
+    rollDice();
+}
+console.log(number)
+return number
 }
 
 function animationRoll(number){
       
-
       setTimeout(() => {
         switch (number) {
           case 1:
@@ -43,8 +51,7 @@ function animationRoll(number){
             break
         }
       },10)
-}
-
+    }
 </script>
  
 <template>
@@ -168,37 +175,37 @@ function animationRoll(number){
 
 .back::after {
     margin: -35px 0 0 -30px;
-    box-shadow: 40px 0,
-                0 25px,
-                40px 25px,
-                0 50px,
-                40px 50px;
+    box-shadow: 40px 0 black,
+                0 25px black,
+                40px 25px black,
+                0 50px black,
+                40px 50px black;
 }
 
 .top::after {
     margin: -30px 0 0 -30px;
-    box-shadow: 40px 40px;
+    box-shadow: 40px 40px black;
 }
 
 .bottom::after {
     margin: -36px 0 0 -36px;
-    box-shadow: 26px 26px,
-                52px 52px,
-                52px 0,
-                0 52px;
+    box-shadow: 26px 26px black,
+                52px 52px black,
+                52px 0 black,
+                0 52px black;
 }
 
 .right::after {
     margin: -30px 0 0 -30px;
-    box-shadow: 40px 0,
-    0 40px,
-    40px 40px;
+    box-shadow: 40px 0 black,
+                0 40px black,
+                40px 40px black;
 }
 
 .left::after {
     margin: -35px 0 0 -35px;
-    box-shadow: 25px 25px,
-                50px 50px;
+    box-shadow: 25px 25px black,
+                50px 50px black;
 }
 
 /* /////////////////////////////////////// */
