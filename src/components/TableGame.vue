@@ -1,14 +1,31 @@
 <script setup>
-import { ref } from 'vue'
+import { ref,computed,inject, provide } from 'vue'
+import Dice from './Dice.vue'
+import {randomNum} from '../randomNumber'
 // import { walkNumber } from './Dice.vue'
 // import { number } from '../play.js'
 const props = defineProps({
-    randomNum: {
-        type: Number,
-        require: true
+    playNum:{
+        type:Number,
+        require:true
+    },
+    randomNum:{
+        type:Number,
+        require:true
     }
+    // play:{
+    //     type:Function,
+    //     require:true
+    // }
 }
 )
+const emits = defineEmits(['play'])
+provide('callPlay',callPlay)
+// let randomNumber= computed(() => inject('randomNumber')) 
+// let randomNumber= inject('randomNumber') 
+let playerNum = computed(() => props.playNum)
+let randomNumber=computed(()=>props.randomNum)
+// let randomNum = computed(() => props.randomNum)
 let p1 = ref('')
 let p2 = ref('')
 let p3 = ref('')
@@ -30,28 +47,31 @@ let p3sum = 0
 let p4sum = 0
 let turn = ref('')
 let tog = 1
-let number = ref(props.randomNum)
+// let number = ref(props.randomNum)
 let player1 = null;
 let player2 = null;
 let player3 = null;
 let player4 = null;
 
 function callPlay() {
-    number.value = Math.floor(Math.random() * 6 + 1)
+    console.log(playerNum.value)
+    console.log(randomNumber.value)
+    // number.value = Math.floor(Math.random() * 6 + 1)
     // return number.value
+    if(playerNum.value==2){
     if (tog % 2 != 0) {
         turn.value.innerText = "Yellow's Turn : "
-        play('player1', 'p1sum', 0, number.value)
+        play('player1', 'p1sum', 20, randomNumber.value)
 
     }
 
     else if (tog % 2 == 0) {
         turn.value.innerText = "Red's Turn : "
 
-        play('player2', 'p2sum', 55, number.value)
+        play('player2', 'p2sum', 55, randomNumber.value)
 
     }
-
+}
     tog = tog + 1
 }
 
@@ -390,7 +410,7 @@ if(playerElement){
             </div>
         </div>
         <button @click="callPlay">Play</button>
-        <p class="rand" ref="rands">{{ number }}</p>
+        <p class="rand" ref="rands">{{ randomNumber }}</p>
         <p class="turn" ref="turn"></p>
     </div>
 </template>
@@ -441,10 +461,10 @@ if(playerElement){
 
     /*new*/
     position: relative;
-  top: 0px;
+  top: -20px;
   transition: all linear 0.5s;
   /* top: 0; */
-  left: -62px;
+  left: -65px;
   z-index: 2;
 }
 
@@ -460,7 +480,7 @@ if(playerElement){
     z-index: 2;
   position: relative;
   top: -55px;
-  left: -62px;
+  left: -65px;
   transition: all linear 0.5s;
   background-color: rgb(243, 181, 46);
 }
