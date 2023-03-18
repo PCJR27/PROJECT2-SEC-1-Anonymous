@@ -197,8 +197,8 @@ function play(player, psum, direction, num) {
 
 let playerElement=getPlayerElement(player)
 if(playerElement){
-
-
+console.log(playerElement)
+console.log(sum)
     playerElement.style.transition = `linear all .5s`
 
 
@@ -210,15 +210,15 @@ if(playerElement){
         playerElement.style.top = `${-0 * 66 - direction}px`
     }
 
-    else if (sum == 100) {
-        winSound.play()
-        if (player == 'p1') {
+    else if (sum >= 100) {
+        // winSound.play()
+        if (player == 'player1') {
             alert("Red Won !!")
         }
-        else if (player == 'p2') {
+        else if (player == 'player2') {
             alert("Yellow Won !!")
         }
-        location.reload()
+        // location.reload()
     }
 
     else {
@@ -472,8 +472,8 @@ if(playerElement){
                 <div class="box" id="b01">Start
                     <p id="player1" ref="p1"></p>
                     <p id="player2" ref="p2"></p>
-                    <!-- <p id="player3" ref="p3"></p>
-                    <p id="player4" ref="p4"></p> -->
+                    <p id="player3" ref="p3"></p>
+                    <p id="player4" ref="p4"></p>
                 </div>
 
                 <div class="box" id="b02">2</div>
@@ -705,7 +705,7 @@ if(playerElement){
   top: -20px;
   transition: all linear 0.5s;
   /* top: 0; */
-  left: -65px;
+  left: -67px;
   z-index: 2;
 }
 
@@ -721,9 +721,47 @@ if(playerElement){
     z-index: 2;
   position: relative;
   top: -55px;
-  left: -65px;
+  left: -67px;
   transition: all linear 0.5s;
   background-color: rgb(243, 181, 46);
+}
+
+#player3 {
+    background-color: rgb(143, 82, 236);
+    /* position: relative;
+    top: -40px;
+    transition: all linear 0.5s; */
+    /* top: 0; */
+    /* right: 15px; */
+    /* z-index: 2; */
+
+    /*new*/
+    background-color: rgb(116, 246, 29);
+    position: relative;
+  top: -90px;
+  transition: all linear 0.5s;
+  /* top: 0; */
+  left: -67px;
+  z-index: 2;
+}
+
+#player4 {
+    background-color: rgb(143, 82, 236);
+    /* position: relative;
+    top: -40px;
+    transition: all linear 0.5s; */
+    /* top: 0; */
+    /* right: 15px; */
+    /* z-index: 2; */
+
+    /*new*/
+    background-color: rgb(239, 16, 16);
+    position: relative;
+  top: -125px;
+  transition: all linear 0.5s;
+  /* top: 0; */
+  left: -67px;
+  z-index: 3;
 }
 
 /* #player3 { */
