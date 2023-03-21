@@ -1,7 +1,9 @@
 <script setup>
 import { ref,computed,inject, provide } from 'vue'
 import Dice from './Dice.vue'
-import {randomNum} from '../randomNumber'
+import WinnerCard from'./WinnerCard.vue'
+import popup from'./popup.vue'
+// import {randomNum} from '../randomNumber'
 // import { walkNumber } from './Dice.vue'
 // import { number } from '../play.js'
 const props = defineProps({
@@ -12,71 +14,166 @@ const props = defineProps({
     randomNum:{
         type:Number,
         require:true
+    },
+    // FILM Test Scope
+    colorInfo:{
+        type:Array,
+        required: true
+    },
+    nameInfo:{
+        type:Array,
+        required:true
     }
-    // play:{
-    //     type:Function,
-    //     require:true
-    // }
+    // FILM Test Scope
 }
 )
-const emits = defineEmits(['play'])
-provide('callPlay',callPlay)
-// let randomNumber= computed(() => inject('randomNumber')) 
-// let randomNumber= inject('randomNumber') 
+
+// FILM Test Scope
+let x = computed(()=> props.nameInfo)
+let y = x.value
+let defaultColor = "#aeaeae"
+let colorUserOBJ 
+let colorUser 
+let color1 = ref('')
+let color2 = ref('')
+let color3 = ref('')
+let color4 = ref('')
+function setInfo(){
+    console.log("Name Info" + y);
+    colorUserOBJ = computed(()=>props.colorInfo)
+    colorUser = colorUserOBJ.value
+
+console.log(colorUser);
+
+    color1.value = colorUser[0]
+    color2.value = colorUser[1]
+    color3.value = colorUser[2]
+    color4.value = colorUser[3]
+}
+// FILM Test Scope
+
+
+
+// let play =ref(false)
+let winStatus = ref(false)
+function showWinner(){
+    winStatus.value = true
+}
+
+// function playAgain(p){
+//     console.log(p)
+// play.value=p
+// }
+let whoTurn = ref('')
+
+let winnerIs = ref('')
+const showPlay=(rollDice,randomNum,animationRoll,e)=>{
+    random.value=randomNum
+    rollDice()
+
+    // FILM Test Scope
+    setInfo()
+    // FILM Test Scope
+    if(e.target.id=='but'){
+        animationRoll(randomNum)
+    }
+    callPlay()
+    
+}
+
 let playerNum = computed(() => props.playNum)
-let randomNumber=computed(()=>props.randomNum)
-// let randomNum = computed(() => props.randomNum)
+let randomNumber = computed(() => random.value)
+let random =ref(0)
+
 let p1 = ref('')
 let p2 = ref('')
 let p3 = ref('')
 let p4 = ref('')
 
+let position1 = 0
+let position2 = 0
+let position3 = 0
+let position4 = 0
+let turnMessage = ref('')
+let turn = 1
 
-// let p = {
-//     players: [
-//         { id: "player1", left: "0px", top: "0px" },
-//         { id: "player2", left: "0px", top: "0px" },
-//         { id: "player3", left: "0px", top: "0px" },
-//         { id: "player4", left: "0px", top: "0px" }
-//     ]
-// }
-let random = ref(0)
-let p1sum = 0
-let p2sum = 0
-let p3sum = 0
-let p4sum = 0
-let turn = ref('')
-let tog = 1
-// let number = ref(props.randomNum)
 let player1 = null;
 let player2 = null;
 let player3 = null;
 let player4 = null;
 
 function callPlay() {
-    console.log(playerNum.value)
-    console.log(randomNumber.value)
-    // number.value = Math.floor(Math.random() * 6 + 1)
-    // return number.value
     if(playerNum.value==2){
-    if (tog % 2 != 0) {
-        turn.value.innerText = "Yellow's Turn : "
-        play('player1', 'p1sum', 20, randomNumber.value)
+        if (turn % 2 != 0) {
+            turnMessage.value.innerText = "Purple's Turn : "
+            console.log('Purple walk =' + random.value)
+            console.log('Purple walk =' + randomNumber.value)
+            walk('player1', 'position1', 20, randomNumber.value)
+            whoTurn.value = 1
+        }
+
+        else if (turn % 2 == 0) {
+            turnMessage.value.innerText = "Yellow's Turn : "
+            walk('player2', 'position2', 55, randomNumber.value)
+            whoTurn.value = 2
+        }
+    }
+
+    if(playerNum.value==3){
+    if  ((turn - 1) % playerNum.value + 1==1) {
+        turnMessage.value.innerText = "Purple's Turn : "
+        walk('player1', 'position1', 20, randomNumber.value)
+        whoTurn.value = 1
+    }
+
+    else if  ((turn - 1) % playerNum.value + 1==2) {
+        turnMessage.value.innerText = "Yellow's Turn : "
+        walk('player2', 'position2', 55, randomNumber.value)
+        whoTurn.value = 2
 
     }
 
-    else if (tog % 2 == 0) {
-        turn.value.innerText = "Red's Turn : "
+    else if  ((turn - 1) % playerNum.value + 1==3) {
+        turnMessage.value.innerText = "Green's Turn : "
+        walk('player3', 'position3', 90, randomNumber.value)
+        whoTurn.value = 3
+    }
 
-        play('player2', 'p2sum', 55, randomNumber.value)
+}
+
+if(playerNum.value==4){
+    if ((turn - 1) % playerNum.value + 1==1) {
+        turnMessage.value.innerText = "Purple's Turn : "
+        walk('player1', 'position1', 20, randomNumber.value)
+        whoTurn.value = 1
+
+    }
+
+    else if ((turn - 1) % playerNum.value + 1==2) {
+        turnMessage.value.innerText = "Yellow's Turn : "
+        walk('player2', 'position2', 55, randomNumber.value)
+        whoTurn.value = 2
+
+    }
+    else if ((turn - 1) % playerNum.value + 1==3) {
+        turnMessage.value.innerText = "Green's Turn : "
+        walk('player3', 'position3', 90, randomNumber.value)
+        whoTurn.value = 3
+
+    }
+    else if ((turn - 1) % playerNum.value + 1==4) {
+        turnMessage.value.innerText= "Red's Turn : "
+        walk('player4', 'position4', 125, randomNumber.value)
+        whoTurn.value = 4
 
     }
 }
-    tog = tog + 1
+
+    turn = turn + 1
 }
 
 
-
+// it is get element by id.
 function getPlayerElement(player) {
     let playerElement = null;
     switch(player) {
@@ -109,51 +206,265 @@ function getPlayerElement(player) {
     }
     return playerElement;
 }
-function play(player, psum, direction, num) {
+function walk(player, position, direction, numberOfWalk) {
     let sum
-    if (psum == 'p1sum') {
-        p1sum = p1sum + num
-        sum = p1sum
+    if (position == 'position1') {
+        position1 = position1 + numberOfWalk
+
+        // if (position1 > 100) {
+        //     position1 = position1 - numberOfWalk
+        //     // sum = p1sum
+        // }
+
+        // if (position1 == 1) {
+        //     position1 = 38
+        // }
+        // if (position1 == 4) {
+        //     position1 = 14
+        // }
+        // if (position1 == 8) {
+        //     position1 = 30
+        // }
+        // if (position1 == 21) {
+        //     position1 = 42
+        // }
+        // if (position1 == 28) {
+        //     position1 = 76
+        // }
+        // if (position1 == 32) {
+        //     position1 = 10
+        // }
+        // if (position1 == 36) {
+        //     position1 = 6
+        // }
+        // if (position1 == 48) {
+        //     position1 = 26
+        // }
+        // if (position1 == 50) {
+        //     position1 = 67
+        // }
+        // if (position1 == 62) {
+        //     position1 = 18
+        // }
+        // if (position1 == 71) {
+        //     position1 = 92
+        // }
+        // if (position1 == 80) {
+        //     position1 = 99
+        // }
+        // if (position1 == 88) {
+        //     position1 = 24
+        // }
+        // if (position1 == 95) {
+        //     position1 = 56
+        // }
+        // if (position1 == 97) {
+        //     position1 = 78
+        // }
+        sum = position1
     }
 
-    if (psum == 'p2sum') {
-        p2sum = p2sum + num
-        sum = p2sum
+    if (position == 'position2') {
+        position2 = position2 + numberOfWalk
+
+        // if (position2 > 100) {
+        //     position2 = position2 - num
+        //     // sum = p1sum
+        // }
+
+        // if (position2 == 1) {
+        //     position2 = 38
+        // }
+        // if (position2 == 4) {
+        //     position2 = 14
+        // }
+        // if (position2 == 8) {
+        //     position2 = 30
+        // }
+        // if (position2 == 21) {
+        //     position2 = 42
+        // }
+        // if (position2 == 28) {
+        //     position2 = 76
+        // }
+        // if (position2 == 32) {
+        //     position2 = 10
+        // }
+        // if (position2 == 36) {
+        //     position2 = 6
+        // }
+        // if (position2 == 48) {
+        //     position2 = 26
+        // }
+        // if (position2 == 50) {
+        //     position2 = 67
+        // }
+        // if (position2 == 62) {
+        //     position2 = 18
+        // }
+        // if (position2 == 71) {
+        //     position2 = 92
+        // }
+        // if (position2 == 80) {
+        //     position2 = 99
+        // }
+        // if (position2 == 88) {
+        //     position2 = 24
+        // }
+        // if (position2 == 95) {
+        //     position2 = 56
+        // }
+        // if (position2 == 97) {
+        //     position2 = 78
+        // }
+        sum = position2
     }
 
-    if (psum == 'p3sum') {
-        p3sum = p3sum + num
-        sum = p3sum
-    }
-    if (psum == 'p4sum') {
-        p4sum = p4sum + num
-        sum = p4sum
-    }
+    if (position == 'position3') {
+        position3 = position3 + numberOfWalk
 
+        
+        // if (position3 > 100) {
+        //     position3 = position3 - num
+        //     // sum = p1sum
+        // }
+
+        // if (position3 == 1) {
+        //     position3 = 38
+        // }
+        // if (position3 == 4) {
+        //     position3 = 14
+        // }
+        // if (position3 == 8) {
+        //     position3 = 30
+        // }
+        // if (position3 == 21) {
+        //     position3 = 42
+        // }
+        // if (position3 == 28) {
+        //     position3 = 76
+        // }
+        // if (position3 == 32) {
+        //     position3 = 10
+        // }
+        // if (position3 == 36) {
+        //     position3 = 6
+        // }
+        // if (position3 == 48) {
+        //     position3 = 26
+        // }
+        // if (position3 == 50) {
+        //     position3 = 67
+        // }
+        // if (position3 == 62) {
+        //     position3 = 18
+        // }
+        // if (position3 == 71) {
+        //     position3 = 92
+        // }
+        // if (position3 == 80) {
+        //     position3 = 99
+        // }
+        // if (position3 == 88) {
+        //     position3 = 24
+        // }
+        // if (position3 == 95) {
+        //     position3 = 56
+        // }
+        // if (position3 == 97) {
+        //     position3 = 78
+        // }
+        sum = position3
+    }
+    if (position == 'position4') {
+        position4 = position4 + numberOfWalk
+        // if (position4 > 100) {
+        //     position4 = position4 - num
+        //     // sum = p1sum
+        // }
+
+        // if (position4 == 1) {
+        //     position4 = 38
+        // }
+        // if (position4 == 4) {
+        //     position4 = 14
+        // }
+        // if (position4 == 8) {
+        //     position4 = 30
+        // }
+        // if (position4 == 21) {
+        //     position4 = 42
+        // }
+        // if (position4 == 28) {
+        //     position4 = 76
+        // }
+        // if (position4 == 32) {
+        //     position4 = 10
+        // }
+        // if (position4 == 36) {
+        //     position4 = 6
+        // }
+        // if (position4 == 48) {
+        //     position4 = 26
+        // }
+        // if (position4 == 50) {
+        //     position4 = 67
+        // }
+        // if (position4 == 62) {
+        //     position4 = 18
+        // }
+        // if (position4 == 71) {
+        //     position4 = 92
+        // }
+        // if (position4 == 80) {
+        //     position4 = 99
+        // }
+        // if (position4 == 88) {
+        //     position4 = 24
+        // }
+        // if (position4 == 95) {
+        //     position4 = 56
+        // }
+        // if (position4 == 97) {
+        //     position4 = 78
+        // }
+        sum = position4
+    }
+// it is get element by id.
 let playerElement=getPlayerElement(player)
 if(playerElement){
-
-
+    console.log(playerElement)
+    console.log(sum)
     playerElement.style.transition = `linear all .5s`
-
-
-
-
-
+    
     if (sum < 10) {
-        playerElement.style.left = `${(sum - 1) * 66}px`
-        playerElement.style.top = `${-0 * 66 - direction}px`
+        playerElement.style.left = `${(sum - 1) * 70}px`
+        playerElement.style.top = `${-0 * 70 - direction}px`
     }
 
-    else if (sum == 100) {
-        winSound.play()
-        if (player == 'p1') {
-            alert("Red Won !!")
+    else if (sum >= 100) {
+        // winSound.play()
+        if (player == 'player1') {
+            winnerIs.value = "player1"
+            showWinner()
+            // alert("Purple Won !!")
         }
-        else if (player == 'p2') {
-            alert("Yellow Won !!")
+        else if (player == 'player2') {
+            winnerIs.value = "player2"
+            showWinner()
+            // alert("Yellow Won !!")
         }
-        location.reload()
+        else if (player == 'player3') {
+            winnerIs.value = "player3"
+            showWinner()
+            // alert("Green Won !!")
+        }
+        else if (player == 'player4') {
+            winnerIs.value = "player4"
+            showWinner()
+            // alert("Red Won !!")
+        }
+        // location.reload()
     }
 
     else {
@@ -167,7 +478,7 @@ if(playerElement){
 
             if (n2 == 0) {
                 playerElement.style.left = `${(9) * 70}px`
-                playerElement.style.top = `${(-n1 + 1) * 66 - direction}px`
+                playerElement.style.top = `${(-n1 + 1) * 70 - direction}px`
             }
             else {
                 playerElement.style.left = `${(9 - (n2 - 1)) * 70}px`
@@ -198,8 +509,29 @@ if(playerElement){
 </script>
  
 <template>
-    <div>
-        <div>
+    <div class="flex w-full">
+        <div class="w-1/3 flex flex-col mr-16">
+        <div class="flex flex-col ">
+                    <div class=" pt-10 pb-10 mb-3 mx-2 rounded-2xl" :style="{ backgroundColor: whoTurn == 1 ? color1 : defaultColor }">
+                        <p>Player 1</p>
+                    </div>
+                    <div class=" pt-10 pb-10 mb-3 mx-2 rounded-2xl" :style="{ backgroundColor: whoTurn == 2 ? color2 : defaultColor }">
+                        <p>Player 2</p>
+                    </div>
+                    <div class=" pt-10 pb-10 mb-3 mx-2 rounded-2xl" :style="{ backgroundColor: whoTurn == 3 ? color3 : defaultColor }">
+                        <p>Player 3</p>
+                    </div>
+                    <div class=" pt-10 pb-10 mb-3 mx-2 rounded-2xl" :style="{ backgroundColor: whoTurn == 4 ? color4 : defaultColor }">
+                        <p>Player 4</p>
+                    </div>
+                </div>
+        
+        <div class="w-1/3">
+            <!-- <p class="rand" ref="rands">{{ randomNumber }}</p> -->
+            <Dice @plays="showPlay" :random="randomNumber"/>
+        </div>
+    </div>
+        <div class="">
             <div class=" boxs grid-cols-10 mt-2">
 
                 <div class="box" id="b100">100</div>
@@ -385,8 +717,8 @@ if(playerElement){
                 <div class="box" id="b01">Start
                     <p id="player1" ref="p1"></p>
                     <p id="player2" ref="p2"></p>
-                    <!-- <p id="player3" ref="p3"></p>
-                    <p id="player4" ref="p4"></p> -->
+                    <p id="player3" ref="p3"></p>
+                    <p id="player4" ref="p4"></p>
                 </div>
 
                 <div class="box" id="b02">2</div>
@@ -408,19 +740,50 @@ if(playerElement){
                 <div class="box" id="b10">10</div>
 
             </div>
+            
+            <!-- <div> -->
+                 <!-- <p class="rand" ref="rands">{{ randomNumber }}</p> -->
+                <p class="turnMessage" ref="turnMessage"></p>
+            <!-- </div>  -->
         </div>
-        <button @click="callPlay">Play</button>
-        <p class="rand" ref="rands">{{ randomNumber }}</p>
-        <p class="turn" ref="turn"></p>
+        <div v-show="winStatus">
+        <WinnerCard v-show="winStatus" :winner="winnerIs"/>
+        <!-- <popup  v-show="winStatus" :winner="winnerIs" @play-again="playAgain">
+            <template v-slot:winnerPlay>
+                </template>
+        </popup>  -->
+    </div>
     </div>
 </template>
  
 <style scoped>
+
+
+/* css new */
+/* body{
+    background-color: #410365;
+} */
+.pColor{
+    background-color:#410365;
+    
+}
+.pMono{
+    background-color: #aeaeae;
+   
+}
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    box-sizing: border-box;
+}
 .boxs {
     display: grid;
     width: 700px;
     height: 700px;
     margin: auto;
+    background-color: #410365;
 }
 
 .boxs div {
@@ -451,7 +814,7 @@ if(playerElement){
 }
 
 #player1 {
-    background-color: rgb(143, 82, 236);
+    background-color: rgb(143, 82, 236); 
     /* position: relative;
     top: -40px;
     transition: all linear 0.5s; */
@@ -462,13 +825,13 @@ if(playerElement){
     /*new*/
     position: relative;
   top: -20px;
-  transition: all linear 0.5s;
+  transition: all linear 0.5s; 
   /* top: 0; */
-  left: -65px;
-  z-index: 2;
-}
+   left: -70px;
+  /* z-index: 2; */
+} 
 
-#player2 {
+ #player2 { 
     /* z-index: 2; */
     /* position: relative;
     top: -70px;
@@ -477,29 +840,50 @@ if(playerElement){
     background-color: rgb(243, 181, 46); */
 
     /*new*/
-    z-index: 2;
+    /* z-index: 2; */
   position: relative;
   top: -55px;
-  left: -65px;
+  left: -70px;
   transition: all linear 0.5s;
   background-color: rgb(243, 181, 46);
 }
 
-/* #player3 { */
-    /* z-index: 2; */
+#player3 {
+    /* background-color: rgb(143, 82, 236); */
     /* position: relative;
-    top: -70px;
-    right: 15px;
-    transition: all linear 0.5s;
-    background-color: rgb(116, 246, 29); */
-/* } */
+    top: -40px;
+    transition: all linear 0.5s; */
+    /* top: 0; */
+    /* right: 15px; */
+    /* z-index: 2; */
 
-/* #player4 { */
-    /* z-index: 2; */
+    /*new*/
+    background-color: rgb(116, 246, 29);
+    position: relative;
+  top: -90px;
+  transition: all linear 0.5s;
+  /* top: 0; */
+  left: -70px; 
+   /* z-index: 2; */
+ }  
+
+ #player4 { 
+    /* background-color: rgb(143, 82, 236); */
     /* position: relative;
-    top: -100px;
-    left: 15px;
-    transition: all linear 0.5s;
-    background-color: rgb(239, 16, 16); */
-/* } */
+    top: -40px;
+    transition: all linear 0.5s; */
+    /* top: 0; */
+    /* right: 15px; */
+    /* z-index: 2; */
+
+    /*new*/
+     background-color: rgb(239, 16, 16);
+    position: relative;
+  top: -125px;
+  transition: all linear 0.5s; 
+  /* top: 0; */
+  left: -70px;
+  /* z-index: 3; */
+ } 
+
 </style>
