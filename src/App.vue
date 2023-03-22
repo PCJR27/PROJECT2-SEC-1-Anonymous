@@ -6,10 +6,11 @@ import popup from './components/popup.vue'
 
 
 //  Test By FILM Do Not Edit Or Move
-import { ref } from 'vue';
+import { ref} from 'vue';
 
 let howToPlayPopup = ref(false)
 let numOfPlayer
+// numOfPlayer=playNum
 // function showPlay(value){
 // console.log(value)
 // }
@@ -31,14 +32,25 @@ let playerColor = ref([])
 // console.log(howToPlayPopup)
 // }
 
-const selectedBinaryFiles = ref('');
+const allPhoto = ref([])
 const selectedBinaryFiles1 = ref('');
 const selectedBinaryFiles2 = ref('');
 const selectedBinaryFiles3 = ref('');
 const selectedBinaryFiles4 = ref('');
 
+// let defaultColor = "#aeaeae"
+// let color1 = ref('')
+// let color2 = ref('')
+// let color3 = ref('')
+// let color4 = ref('')
+// color1.value =  playerColor.value[0]
+// color2.value =  playerColor.value[1]
+// color3.value =  playerColor.value[2]
+// color4.value =  playerColor.value[3]
+
 const chooseBinaryFile = (e, index) => {
   console.log(numOfPlayer);
+  console.log(selectedBinaryFiles1);
   if (index === 0) {
     selectedBinaryFiles1.value = e.target.files[0];
   } else if (index === 1) {
@@ -49,6 +61,14 @@ const chooseBinaryFile = (e, index) => {
     selectedBinaryFiles4.value = e.target.files[0];
   };
 
+}
+
+function addPhoto() {
+  console.log(allPhoto);
+  allPhoto.value[0] = selectedBinaryFiles1.value
+  allPhoto.value[1] = selectedBinaryFiles2.value
+  allPhoto.value[2] = selectedBinaryFiles3.value
+  allPhoto.value[3] = selectedBinaryFiles4.value
 }
 
 let twoUser = ref(false)
@@ -75,12 +95,16 @@ function UserControl() {
 
 
 }
+
+
 const onClose = (value) => {
   console.log(value)
   howToPlayPopup.value = value
+
+  console.log(playerName);
 }
 
-
+defineEmits(['playerControl'])
 
 </script>
 
@@ -151,71 +175,89 @@ const onClose = (value) => {
       <div class=" text-white bg-gray-800 pt-28 flex-col">
 
         <div class=" flex flex-row" v-show="twoUser">
-          <div class="w-3/5 bg-red-300 text-5xl p-5">Your Info</div>
-          <div class="w-2/5 bg-red-600 text-5xl p-5">Preview</div>
+          <div class="w-1/2 text-5xl p-5" >Your Info</div>
+          <div class="w-1/2 text-5xl p-5">Preview</div>
         </div>
 
         <div class="flex flex-row" v-show="twoUser">
-          <div class="w-3/5 bg-blue-500 p-5 text-3xl">
-            <input class="rounded-full w-1/4 p-2 m-2" type="text" placeholder="Player Name" v-model="playerName[0]">
-            <input @change="e => chooseBinaryFile(e, 0)" type="file" accept="image/*">
-            <input class="rounded-full w-1/4 p-6 m-2" type="color" placeholder="Player Name" v-model="playerColor[0]">
+          <div class="w-1/2 p-5 text-3xl">
+            <input class="rounded-full w-1/4 p-1 m-2  border text-xl border-gray-400 hover:border-gray-500" type="text" placeholder="Player Name" v-model="playerName[0]">
+            <input @change="e => chooseBinaryFile(e, 0)" class=" rounded-full" style="display:none;" type="file" accept="image/*" id="img1">
+            <label class="rounded-full w-1/4 p-1 px-16 m-2 text-xl bg-slate-500 border border-gray-400 hover:border-gray-500" for="img1">Select Your Pic</label>
+            <input class="" type="color" v-model="playerColor[0]">                          
           </div>
-          <div class="w-2/5 bg-red-500 flex flex-col">
-            <BinaryPreview :select-binary-object="selectedBinaryFiles1" />
-            {{ playerName[0] }}
-            {{ playerColor[0] }}
+          
+          <div class="w-1/2 flex flex-row ">
+            <BinaryPreview class="mt-6 ml-6" :select-binary-object="selectedBinaryFiles1" />
+            <span class="flex flex-col mt-6">
+              <p class=" m-4 text-4xl" style="font-family: researcher;">{{ playerName[0] }}</p>
+              <p class=" m-4 text-2xl">{{ playerColor[0] }}</p>
+            </span>
           </div>
         </div>
+        
 
         <div class="flex flex-row" v-show="twoUser">
-          <div class="w-3/5 bg-blue-500 p-5 text-3xl">
-            <input class="rounded-full w-1/4 p-2 m-2" type="text" placeholder="Player Name" v-model="playerName[1]">
-            <input @change="e => chooseBinaryFile(e, 1)" type="file" accept="image/*">
-            <input class="rounded-full w-1/4 p-6 m-2" type="color" placeholder="Player Name" v-model="playerColor[1]">
+          <div class="w-1/2 p-5 text-3xl">
+            <input class="rounded-full w-1/4 p-1 m-2  border text-xl border-gray-400 hover:border-gray-500" type="text" placeholder="Player Name" v-model="playerName[1]">
+            <input @change="e => chooseBinaryFile(e, 1)" class=" rounded-full" style="display:none;" type="file" accept="image/*" id="img2">
+            <label class="rounded-full w-1/4 p-1 px-16 m-2 text-xl bg-slate-500 border border-gray-400 hover:border-gray-500" for="img2">Select Your Pic</label>
+            <input class="" type="color" v-model="playerColor[1]">
           </div>
-          <div class="w-2/5 bg-red-500 flex flex-col">
-            <BinaryPreview :select-binary-object="selectedBinaryFiles2" />
-            {{ playerName[1] }}
-            {{ playerColor[1] }}
+
+          <div class="w-1/2 flex flex-row ">
+            <BinaryPreview class="mt-6 ml-6"  :select-binary-object="selectedBinaryFiles2" />
+            <span class="flex flex-col mt-6">
+              <p class=" m-4 text-4xl" style="font-family: researcher;">{{ playerName[1] }}</p>
+              <p class=" m-4 text-2xl">{{ playerColor[1] }}</p>
+            </span>
           </div>
         </div>
 
         <div class="flex flex-row" v-show="threeUser">
-          <div class="w-3/5 bg-blue-500 p-5 text-3xl">
-            <input class="rounded-full w-1/4 p-2 m-2" type="text" placeholder="Player Name" v-model="playerName[2]">
-            <input @change="e => chooseBinaryFile(e, 2)" type="file" accept="image/*">
-            <input class="rounded-full w-1/4 p-6 m-2" type="color" placeholder="Player Name" v-model="playerColor[2]">
+          <div class="w-1/2 p-5 text-3xl">
+            <input class="rounded-full w-1/4 p-1 m-2  border text-xl border-gray-400 hover:border-gray-500" type="text" placeholder="Player Name" v-model="playerName[2]">
+            <input @change="e => chooseBinaryFile(e, 2)" class=" rounded-full" style="display:none;" type="file" accept="image/*" id="img3">
+            <label class="rounded-full w-1/4 p-1 px-16 m-2 text-xl bg-slate-500 border border-gray-400 hover:border-gray-500" for="img3">Select Your Pic</label>
+            <input class="" type="color" v-model="playerColor[2]">
           </div>
-          <div class="w-2/5 bg-red-500 flex flex-col">
-            <BinaryPreview :select-binary-object="selectedBinaryFiles3" />
-            {{ playerName[2] }}
-            {{ playerColor[2] }}
+
+          <div class="w-1/2 flex flex-row ">
+            <BinaryPreview class="mt-6 ml-6"  :select-binary-object="selectedBinaryFiles3" />
+            <span class="flex flex-col mt-6">
+              <p class=" m-4 text-4xl" style="font-family: researcher;">{{ playerName[2] }}</p>
+              <p class=" m-4 text-2xl">{{ playerColor[2] }}</p>
+            </span>
           </div>
         </div>
 
         <div class="flex flex-row" v-show="fourUser">
-          <div class="w-3/5 bg-blue-500 p-5 text-3xl">
-            <input class="rounded-full w-1/4 p-2 m-2" type="text" placeholder="Player Name" v-model="playerName[3]">
-            <input @change="e => chooseBinaryFile(e, 3)" type="file" accept="image/*">
-            <input class="rounded-full w-1/4 p-6 m-2" type="color" placeholder="Player Name" v-model="playerColor[3]">
+
+          <div class="w-1/2 p-5 text-3xl">
+            <input class="rounded-full w-1/4 p-1 m-2  border text-xl border-gray-400 hover:border-gray-500" type="text" placeholder="Player Name" v-model="playerName[3]">
+            <input @change="e => chooseBinaryFile(e, 3)" class=" rounded-full" style="display:none;" type="file" accept="image/*" id="img4">
+            <label class="rounded-full w-1/4 p-1 px-16 m-2 text-xl bg-slate-500 border border-gray-400 hover:border-gray-500" for="img4">Select Your Pic</label>
+            <input class="" type="color" v-model="playerColor[3]">
           </div>
-          <div class="w-2/5 bg-red-500 flex flex-col">
-            <BinaryPreview :select-binary-object="selectedBinaryFiles4" />
-            {{ playerName[3] }}
-            {{ playerColor[3] }}
+
+          <div class="w-1/2  flex flex-row ">
+            <BinaryPreview class="mt-6 ml-6"  :select-binary-object="selectedBinaryFiles4" />
+            <span class="flex flex-col mt-6">
+              <p class=" m-4 text-4xl" style="font-family: researcher;">{{ playerName[3] }}</p>
+              <p class=" m-4 text-2xl">{{ playerColor[3] }}</p>
+            </span>
           </div>
         </div>
 
         <div style="text-align: center;" v-show="twoUser">
-          <button class="rounded-full bg-white w-1/12 text-black" @click="x">Confirm</button>
+          <button class="rounded-full bg-white w-1/12 text-black" @click="con" >Confirm</button>
 
         </div>
         <!-- Game -->
         <div class="flex">
           <div class="w-full flex" id="page4">
             <div class="flex-cols bg-gray-900 w-full">
-              <TableGame :playNum="numOfPlayer" :color-info="playerColor" :player-name="playerName"/>
+              <TableGame :playNum="numOfPlayer" :color-info="playerColor" :name-info="playerName" :all-photo="selectedBinaryFiles1"/>
             </div>
           </div>
         </div>
@@ -301,4 +343,5 @@ button:hover i::after {
   src: local("researcher"),
     url(./assets/Font/researcher/researcher-researcher-bold-700.otf) format("truetype");
 }
+
 </style>

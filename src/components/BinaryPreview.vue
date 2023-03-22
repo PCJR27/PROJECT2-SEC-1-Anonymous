@@ -65,7 +65,7 @@ const canPreview = computed(() => {
             
             <!-- <img v-for=" item of previewSrc" :src="item" class="w-52 h-52"> -->
 
-            <img :src="previewSrc" class="w-52 h-52">
+            <img :src="previewSrc" class="w-40 h-40 rounded-2xl object-cover">
             <!-- <img :src="previewSrc[1]" class="w-52 h-52"> -->
             <!-- {{ item }} -->
             <!-- {{ previewSrc.length }}
