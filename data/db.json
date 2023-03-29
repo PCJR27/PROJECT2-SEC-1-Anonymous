@@ -1,0 +1,41 @@
+{
+  "groups": [
+    {
+      "groupName":"astronaut team",
+      "numOfPlayer":"2",
+      "member": [
+        {
+          "player1": {
+            "name": "Ou1",
+            "color": "red",
+            "picture": "{}"
+          },
+          "player2": {
+            "name": "Ou2",
+            "color": "blue",
+            "picture": "{}"
+          }
+        }
+        
+      ]
+    },
+    {
+      "groupName":"alien team",
+      "numOfPlayer":"2",
+      "member": [
+        {
+          "player1":{
+            "name": "Neng",
+            "color": "red",
+            "picture": "{}"
+          },
+          "player2": {
+            "name": "Neng2",
+            "color": "blue",
+               "picture": "{}"
+          }
+        }
+      ]
+    }
+  ]
+}

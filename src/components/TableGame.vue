@@ -1,97 +1,123 @@
 <script setup>
 import { ref,computed,provide, onMounted,watch } from 'vue'
 import Dice from './Dice.vue'
-import WinnerCard from'./WinnerCard.vue'
-import popup from'./popup.vue'
-import BinaryPreview from './BinaryPreview.vue'
+import Popup from './Popup.vue'
+import { getGroups } from './../composable/getGroups.js'
+const userInfo = ref([])
 
-
-
-
-
-// import {randomNum} from '../randomNumber'
-// import { walkNumber } from './Dice.vue'
-// import { number } from '../play.js'
 
 const props = defineProps({
-playNum:{
+needInfo:{
+        type:String,
+        default:null
+    },
+    gId: { 
         type:Number,
-        require:true
-    },
-    randomNum:{
-        type:Number,
-        require:true
-    },
-    // FILM Test Scope
-    colorInfo:{
-        type:Array,
-        required: true
-    },
-    nameInfo:{
-        type:Array,
-        required: true
-    },
-    allPhoto:{
-        type:Array,
-        required:true
+        default:null
+
     }
-    // FILM Test Scope
-}
-)
+    // ,
+    // userInfo:{
+    //     type:Array,
+    //     default:null
+    // }
+})
 
-// FILM Test Scope
-let x = ref(0)
-x= props.playNum
+let groupId = computed(()=> props.gId)
+let groupUser=computed(()=>{props.userInfo})
 
+// let groupId = ref(8)
+let singleGroup
+let playerNum = ref(Number)
 let defaultColor = "#aeaeae"
-let colorUserOBJ 
-let colorUser 
+let playerName = []
 let color1 = ref('')
 let color2 = ref('')
 let color3 = ref('')
 let color4 = ref('')
+const getUserInfo = async () => {   
+    userInfo.value = await getGroups()
+} 
 
-let picOBJ 
-let pic
-let pic1 = ref('')
-let pic2 = ref('')
-let pic3 = ref('')
-let pic4 = ref('')
+async function  checkControler(){
+    if (groupId.value !== null){
+        await getUserInfo()
+        singleGroup = userInfo.value.filter((i) => i.id === groupId.value) 
+        setUserInfo()
+    }else {
+        await getUserInfo()
+        let allId = []
+        let id 
+        for (let item of userInfo.value){
+        allId.push(item.id) 
+        }
+        allId = allId[allId.length-1]
+        singleGroup = userInfo.value.filter((i) => i.id === allId) 
+        setUserInfo()
+    }
 
-function setInfo(){
-    colorUserOBJ = computed(()=>props.colorInfo)
-    colorUser = colorUserOBJ.value
-console.log(props.allPhoto);
-
-console.log("Pic 1 " + pic1);
-    picOBJ = computed(() => props.allPhoto)
-    pic = picOBJ.value
-// pic1.value = props.allPhoto[0].toString();
-// pic2.value = props.allPhoto[1]
-// pic3.value = props.allPhoto[2]
-// pic4.value = props.allPhoto[3]
-
-
-pic1.value = pic[0]
-pic2.value = pic[1]
-pic3.value = pic[2]
-pic4.value = pic[3]
-
-console.log("Pic 1 " + pic1);
-
-
-    color1.value = colorUser[0]
-    color2.value = colorUser[1]
-    color3.value = colorUser[2]
-    color4.value = colorUser[3]
 }
+
+
+function setUserInfo(){
+    for (let item of singleGroup){
+    color1.value = item.member[0].player1.color
+    color2.value = item.member[0].player2.color
+    color3.value = item.member[0].player3.color
+    color4.value = item.member[0].player4.color
+
+    playerNum.value = item.numOfPlayer
+
+    playerName[0] = (item.member[0].player1.name) 
+    playerName[1] = (item.member[0].player2.name) 
+    playerName[2] = (item.member[0].player3.name) 
+    playerName[3] = (item.member[0].player4.name) 
+  } 
+}
+
+watch(props.userInfo,checkControler)
+watch(groupId,checkControler )
+
+
+
+
+
+
+
+// function setInfo(){
+//     colorUserOBJ = computed(()=>props.colorInfo)
+//     colorUser = colorUserOBJ.value
+// console.log(props.allPhoto);
+
+// console.log("Pic 1 " + pic1);
+//     picOBJ = computed(() => props.allPhoto)
+//     pic = picOBJ.value
+// // pic1.value = props.allPhoto[0].toString();
+// // pic2.value = props.allPhoto[1]
+// // pic3.value = props.allPhoto[2]
+// // pic4.value = props.allPhoto[3]
+
+
+// pic1.value = pic[0]
+// pic2.value = pic[1]
+// pic3.value = pic[2]
+// pic4.value = pic[3]
+
+// console.log("Pic 1 " + pic1);
+
+
+//     color1.value = colorUser[0]
+//     color2.value = colorUser[1]
+//     color3.value = colorUser[2]
+//     color4.value = colorUser[3]
+// }
 // FILM Test Scope
 
 
-let winStatus = ref(false)
-function showWinner(){
-    winStatus.value = true
-}
+// let winStatus = ref(false)
+// function showWinner(){
+//     winStatus.value = true
+// }
 
 let whoTurn = ref('')
 
@@ -99,8 +125,9 @@ let winnerIs = ref('')
 const showPlay=(rollDice,randomNum,animationRoll,e)=>{
     random.value=randomNum
     rollDice()
-    setInfo()
-    console.log(playerNum.value);
+    getUserInfo()
+    checkControler()
+    
     if(e.target.id=='but'){
         animationRoll(randomNum)
     }
@@ -108,7 +135,7 @@ const showPlay=(rollDice,randomNum,animationRoll,e)=>{
     
 }
 
-let playerNum = computed(() => props.playNum)
+// let playerNum = computed(() => props.playNum)
 let randomNumber = computed(() => random.value)
 let random =ref(0)
 
@@ -162,7 +189,7 @@ let player4 = null;
 function callPlay() {
     if (playerNum.value == 2) {
         if (turn % 2 != 0) {
-            turnMessage.value.innerText = "Purple's Turn : "
+            turnMessage.value.innerText = 'Turn :'+playerName[0]
             console.log('Purple walk =' + random.value)
             console.log('Purple walk =' + randomNumber.value)
             walk('player1', 'position1', 20, randomNumber.value)
@@ -173,7 +200,7 @@ function callPlay() {
             whoTurn.value = 1
         }
         else if (turn % 2 == 0) {
-            turnMessage.value.innerText = "Yellow's Turn : "
+            turnMessage.value.innerText = 'Turn :'+playerName[1]
             walk('player2', 'position2', 55, randomNumber.value)
             setTimeout(() => {
                 move('player2', position2, 55)
@@ -183,7 +210,7 @@ function callPlay() {
     }
     if (playerNum.value == 3) {
         if ((turn - 1) % playerNum.value + 1 == 1) {
-            turnMessage.value.innerText = "Purple's Turn : "
+            turnMessage.value.innerText = 'Turn :'+playerName[0]
             walk('player1', 'position1', 20, randomNumber.value)
             setTimeout(() => {
                 move('player1', position1, 20)
@@ -193,7 +220,7 @@ function callPlay() {
             whoTurn.value = 1
         }
         else if ((turn - 1) % playerNum.value + 1 == 2) {
-            turnMessage.value.innerText = "Yellow's Turn : "
+            turnMessage.value.innerText = 'Turn :'+playerName[1]
             walk('player2', 'position2', 55, randomNumber.value)
             setTimeout(() => {
                 move('player2', position2, 55)
@@ -202,7 +229,7 @@ function callPlay() {
             whoTurn.value = 2
         }
         else if ((turn - 1) % playerNum.value + 1 == 3) {
-            turnMessage.value.innerText = "Green's Turn : "
+            turnMessage.value.innerText = 'Turn :'+playerName[2]
             walk('player3', 'position3', 90, randomNumber.value)
             setTimeout(() => {
                 move('player3', position3, 90)
@@ -213,7 +240,7 @@ function callPlay() {
     }
     if (playerNum.value == 4) {
         if ((turn - 1) % playerNum.value + 1 == 1) {
-            turnMessage.value.innerText = "Purple's Turn : "
+            turnMessage.value.innerText = 'Turn :'+playerName[0]
             walk('player1', 'position1', 20, randomNumber.value)
             setTimeout(() => {
                 move('player1', position1, 20)
@@ -222,7 +249,7 @@ function callPlay() {
             whoTurn.value = 1
         }
         else if ((turn - 1) % playerNum.value + 1 == 2) {
-            turnMessage.value.innerText = "Yellow's Turn : "
+            turnMessage.value.innerText = 'Turn :'+playerName[1]
             walk('player2', 'position2', 55, randomNumber.value)
             setTimeout(() => {
                 move('player2', position2, 55)
@@ -231,7 +258,7 @@ function callPlay() {
             whoTurn.value = 2
         }
         else if ((turn - 1) % playerNum.value + 1 == 3) {
-            turnMessage.value.innerText = "Green's Turn : "
+            turnMessage.value.innerText = 'Turn :'+playerName[2]
             walk('player3', 'position3', 90, randomNumber.value)
             setTimeout(() => {
                 move('player3', position3, 90)
@@ -240,7 +267,7 @@ function callPlay() {
             whoTurn.value = 3
         }
         else if ((turn - 1) % playerNum.value + 1 == 4) {
-            turnMessage.value.innerText = "Red's Turn : "
+            turnMessage.value.innerText = 'Turn :'+playerName[3]
             walk('player4', 'position4', 125, randomNumber.value)
             setTimeout(() => {
                 move('player4', position4, 125)
@@ -290,10 +317,10 @@ function walk(player, position, direction, numberOfWalk) {
     let sum
     if (position == 'position1') {
         position1 = position1 + numberOfWalk
-        if (position1 > 100) {
-            position1 = position1 - numberOfWalk
-            // sum = p1sum
-        }
+        // if (position1 > 100) {
+        //     position1 = position1 - numberOfWalk
+        //     // sum = p1sum
+        // }
         if (position1 == 1) {
             position1 = 1
             setTimeout(() => {
@@ -363,10 +390,10 @@ function walk(player, position, direction, numberOfWalk) {
     }
     if (position == 'position2') {
         position2 = position2 + numberOfWalk
-        if (position2 > 100) {
-            position2 = position2 - num
-            // sum = p1sum
-        }
+        // if (position2 > 100) {
+        //     position2 = position2 - num
+        //     // sum = p1sum
+        // }
         if (position2 == 1) {
             position2 = 1
             setTimeout(() => {
@@ -382,7 +409,6 @@ function walk(player, position, direction, numberOfWalk) {
                 position2 = 14
                 console.log(position2)
             }, 500)
-            console.log('porcha')
             // position2 = 14
         }
         if (position2 == 8) {
@@ -440,10 +466,10 @@ function walk(player, position, direction, numberOfWalk) {
     if (position == 'position3') {
         position3 = position3 + numberOfWalk
 
-        if (position3 > 100) {
-            position3 = position3 - num
-            // sum = p1sum
-        }
+        // if (position3 > 100) {
+        //     position3 = position3 - num
+        //     // sum = p1sum
+        // }
         if (position3 == 1) {
             position3 = 1
             setTimeout(() => {
@@ -523,10 +549,10 @@ function walk(player, position, direction, numberOfWalk) {
     }
     if (position == 'position4') {
         position4 = position4 + numberOfWalk
-        if (position4 > 100) {
-            position4 = position4 - num
-            // sum = p1sum
-        }
+        // if (position4 > 100) {
+        //     position4 = position4 - num
+        //     // sum = p1sum
+        // }
         if (position4 == 1) {
             position4 = 1
             setTimeout(() => {
@@ -617,23 +643,23 @@ if(playerElement){
     else if (sum >= 100) {
         // winSound.play()
         if (player == 'player1') {
-            winnerIs.value = props.nameInfo[0]
-            showWinner()
+            // winnerIs.value = props.nameInfo[0]
+            // showWinner()
             // alert("Purple Won !!")
         }
         else if (player == 'player2') {
-            winnerIs.value = props.nameInfo[1]
-            showWinner()
+            // winnerIs.value = props.nameInfo[1]
+            // showWinner()
             // alert("Yellow Won !!")
         }
         else if (player == 'player3') {
-            winnerIs.value = props.nameInfo[2]
-            showWinner()
+            // winnerIs.value = props.nameInfo[2]
+            // showWinner()
             // alert("Green Won !!")
         }
         else if (player == 'player4') {
-            winnerIs.value = props.nameInfo[3]
-            showWinner()
+            // winnerIs.value = props.nameInfo[3]
+            // showWinner()
             // alert("Red Won !!")
         }
         // location.reload()
@@ -693,24 +719,28 @@ if(playerElement){
     else if (sum >= 100) {
         // winSound.play()
         if (player == 'player1') {
-            winnerIs.value = props.nameInfo[0]
-            showWinner()
+            // winnerIs.value = props.nameInfo[0]
+            // showWinner()
             // alert("Purple Won !!")
+            winnerIs.value = playerName[0]
         }
         else if (player == 'player2') {
-            winnerIs.value = props.nameInfo[1]
-            showWinner()
+            // winnerIs.value = props.nameInfo[1]
+            // showWinner()
             // alert("Yellow Won !!")
+            winnerIs.value = playerName[1]
         }
         else if (player == 'player3') {
-            winnerIs.value = props.nameInfo[2]
-            showWinner()
+            // winnerIs.value = props.nameInfo[2]
+            // showWinner()
             // alert("Green Won !!")
+            winnerIs.value = playerName[2]
         }
         else if (player == 'player4') {
-            winnerIs.value = props.nameInfo[3]
-            showWinner()
+            // winnerIs.value = props.nameInfo[3]
+            // showWinner()
             // alert("Red Won !!")
+            winnerIs.value = playerName[3]
         }
         // location.reload()
     }
@@ -758,19 +788,17 @@ if(playerElement){
     <div class="flex w-full">
         <div class="w-1/3 flex flex-col mr-16">
         <div class="flex flex-col ">
-                    <div class=" pt-10 pb-10 mb-3 mx-2 rounded-2xl" v-show="twoUser" :style="{ backgroundColor: whoTurn == 1 ? color1 : defaultColor }">
-                        <p>{{ props.nameInfo[0]}}</p>
-                        <!-- <BinaryPreview :select-binary-object="pic1" /> -->
+                    <div class=" py-7 mb-3 mx-2 rounded-2xl" v-show="twoUser" :style="{ backgroundColor: whoTurn == 1 ? color1 : defaultColor }">
+                        <p class="text-black text-center text-2xl">{{ playerName[0]}}</p>
                     </div>
-                    <div class=" pt-10 pb-10 mb-3 mx-2 rounded-2xl" v-show="twoUser" :style="{ backgroundColor: whoTurn == 2 ? color2 : defaultColor }">
-                        <p>{{ props.nameInfo[1]}}</p>
-                        <!-- <BinaryPreview :select-binary-object="props.allPhoto" /> -->
+                    <div class=" py-7 mb-3 mx-2 rounded-2xl" v-show="twoUser" :style="{ backgroundColor: whoTurn == 2 ? color2 : defaultColor }">
+                        <p class="text-black text-center text-2xl">{{ playerName[1]}}</p>
                     </div>
-                    <div class=" pt-10 pb-10 mb-3 mx-2 rounded-2xl" v-show="threeUser" :style="{ backgroundColor: whoTurn == 3 ? color3 : defaultColor }">
-                        <p>{{ props.nameInfo[2]}}</p>
+                    <div class=" py-7 mb-3 mx-2 rounded-2xl" v-show="threeUser" :style="{ backgroundColor: whoTurn == 3 ? color3 : defaultColor }">
+                        <p class="text-black text-center text-2xl">{{ playerName[2]}}</p>
                     </div>
-                    <div class=" pt-10 pb-10 mb-3 mx-2 rounded-2xl" v-show="fourUser" :style="{ backgroundColor: whoTurn == 4 ? color4 : defaultColor }">
-                        <p>{{ props.nameInfo[3]}}</p>
+                    <div class=" py-7 mb-3 mx-2 rounded-2xl" v-show="fourUser" :style="{ backgroundColor: whoTurn == 4 ? color4 : defaultColor }">
+                        <p class="text-black text-center text-2xl">{{ playerName[3]}}</p>
                     </div>
                 </div>
         
@@ -994,13 +1022,10 @@ if(playerElement){
                 <p class="turnMessage" ref="turnMessage"></p>
             <!-- </div>  -->
         </div>
-        <div v-show="winStatus">
-        <WinnerCard v-show="winStatus" :winner="winnerIs"/>
-        <!-- <popup  v-show="winStatus" :winner="winnerIs" @play-again="playAgain">
-            <template v-slot:winnerPlay>
-                </template>
-        </popup>  -->
-    </div>
+
+        <div>
+            <Popup :winner-is="winnerIs"/>
+        </div>
     </div>
 </template>
  

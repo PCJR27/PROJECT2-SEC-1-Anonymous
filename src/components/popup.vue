@@ -1,55 +1,55 @@
 <script setup>
-import { ref,computed} from 'vue';
+import { ref,computed,watch} from 'vue';
 // let popupStatus  = ref(false)
 
 const props = defineProps({
     popStatus : {
-      tyepe:Boolean,
-      default:false
+      tyepe:String,
+      default:''
+    },
+    winnerIs: {
+        type: String,
+        default: 'noWin'
     }
-    // winner: {
-    //     type: String,
-    //     default: null
-    // }
 
 })
+let closeHowto  = ref(false)
+let win = ref('')
+let closeWinner = ref(false)
+let popupStatus = computed(()=> props.popStatus) 
+let popupWinner = computed(()=>props.winnerIs) 
 
-// const emits=defineEmits=(['isClose'])
-const emits = defineEmits(['isClose','playAgain'])
-let win = computed(() => props.winner)
-
-let playAgain=()=>{
-    return location.reload
+function popupControl(){
+    if (popupStatus.value === 'bigPopup'){
+        closeHowto.value = true
+    }
+    if (popupWinner.value !== 'noWin' ){
+        closeWinner.value =  true
+        win.value = popupWinner.value
+    }
+    console.log("---------------------");
+    
 }
+watch (popupStatus,popupControl)
+watch (popupWinner,popupControl)
+// let closeHowto=ref(true)
+// watch(props.winner,closeHowto=false)
+// const emits=defineEmits=(['isClose'])
+// const emits = defineEmits(['isClose','playAgain'])
+// let win = computed(() => props.winner)
+
+// let playAgain=()=>{
+//     return location.reload
+// }
 // function popupControl() {
 //       console.log(props.popStatus);
 //        return props.popStatus = false}
 </script>
  
 <template>
-    <div>
-        
-        <div class="popup">
-              <div class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2  w-screen h-screen bg-black opacity-60">
-              </div>
-          </div>
-        <div class="popup">
-            <div class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2  w-5/6 h-5/6 bg-white rounded-xl">
-                <div>
-                    <button @click="emits('isClose', false)" class="hover:bg-red-400 transition duration-500 ease-in-out bg-gray-300 fixed right-10 top-10 text-gray-800 font-bold text-2xl border-r-4 py-2 px-4 rounded-full">x</button>
-                    <p class="text-black text-center text-5xl  mt-16 ">How to Play</p>
-                </div>
-                <div class="fixed bottom-10 left-1/2 -translate-x-1/2 ">
-                    <button class="bg-gray-300 text-gray-800 font-bold text-2xl py-2 px-4 border-r-8 rounded-l-full hover:bg-red-400 transition duration-500 ease-in-out ">Back</button>
-                    <button class="bg-gray-300 text-gray-800 font-bold text-2xl py-2 px-4 rounded-r-full hover:bg-red-400 transition duration-500 ease-in-out ">Next</button>
-                </div>
 
-            </div>
-        </div>
-    </div>
-
-    
-    <!-- <slot name="howtoPlay">
+<div v-show="closeHowto">
+    <!-- <slot name="howtoPlay"> -->
             <div class="popup">
               <div class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2  w-screen h-screen bg-black opacity-60">
               </div>
@@ -57,7 +57,8 @@ let playAgain=()=>{
         <div class="popup">
             <div class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2  w-5/6 h-5/6 bg-white rounded-xl">
                 <div>
-                    <button @click="emits('isClose', false)" class="hover:bg-red-400 transition duration-500 ease-in-out bg-gray-300 fixed right-10 top-10 text-gray-800 font-bold text-2xl border-r-4 py-2 px-4 rounded-full">x</button>
+                    <!-- <button @click="emits('isClose', false)" class="hover:bg-red-400 transition duration-500 ease-in-out bg-gray-300 fixed right-10 top-10 text-gray-800 font-bold text-2xl border-r-4 py-2 px-4 rounded-full">x</button> -->
+                    <button @click="closeHowto = false" class="hover:bg-red-400 transition duration-500 ease-in-out bg-gray-300 fixed right-10 top-10 text-gray-800 font-bold text-2xl border-r-4 py-2 px-4 rounded-full">x</button>
                     <p class="text-black text-center text-5xl  mt-16 ">How to Play</p>
                 </div>
                 <div class="fixed bottom-10 left-1/2 -translate-x-1/2 ">
@@ -67,9 +68,11 @@ let playAgain=()=>{
 
             </div>
         </div>
-    </slot>
+    <!-- </slot> -->
+</div>
 
-    <slot name="winnerPlay">
+<div v-show = 'closeWinner'>
+    <!-- <slot name="winnerPlay"> -->
        <div class="popup">
             <div class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  w-screen h-screen bg-black opacity-60">
             </div>
@@ -81,14 +84,21 @@ let playAgain=()=>{
                     <p class="text-black text-center text-5xl  mt-16 ">{{ win }}</p>
                 </div>
                 <div class="fixed bottom-10 left-1/2 -translate-x-1/2 ">
-                    <button
+                    <!-- <button
                         class="bg-gray-300 text-gray-800 font-bold text-3xl py-2 px-4 rounded-full hover:bg-red-400 transition duration-500 ease-in-out "
                         @click="$emit('playAgain',false)">Play Again</button>
+                         -->
+
+                         <button
+                        class="bg-gray-300 text-gray-800 font-bold text-3xl py-2 px-4 rounded-full hover:bg-red-400 transition duration-500 ease-in-out "
+                        @click="closeWinner = false">Play Again</button>
+                        
                 </div>
 
             </div>
         </div>
-        </slot> -->
+        <!-- </slot> -->
+    </div>
 </template>
  
 <style scoped>
@@ -152,18 +162,6 @@ button:hover i::after {
     border-radius: 30px;
   width: 20px;
   left: 80%;
-}
-
-@font-face {
-  font-family: "XSpace";
-  src: local("XSpace"),
-   url(./assets/Font/xspace/ttf/xspace-xspace-400.ttf) format("truetype");
-}
-
-@font-face {
-  font-family: "varino";
-  src: local("varino"),
-   url(./assets/Font/varino/Varino.ttf) format("truetype");
 }
 
 @font-face {

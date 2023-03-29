@@ -1,0 +1,62 @@
+{
+  "groups": [
+    {
+      "groupName": "dew",
+      "numOfPlayer": "2",
+      "member": [
+        {
+          "player1": {
+            "name": "few",
+            "color": "#d58400",
+            "picture": {}
+          },
+          "player2": {
+            "name": "few",
+            "color": "#d29d00",
+            "picture": {}
+          },
+          "player3": {
+            "name": "",
+            "color": "",
+            "picture": {}
+          },
+          "player4": {
+            "name": "",
+            "color": "",
+            "picture": {}
+          }
+        }
+      ],
+      "id": 8
+    },
+    {
+      "groupName": "rtyuiop",
+      "numOfPlayer": "4",
+      "member": [
+        {
+          "player1": {
+            "name": "vbnjmk,l.;",
+            "color": "#ffffff",
+            "picture": {}
+          },
+          "player2": {
+            "name": "cfgyui90",
+            "color": "#000000",
+            "picture": {}
+          },
+          "player3": {
+            "name": "rtghnm ",
+            "color": "#ff0000",
+            "picture": {}
+          },
+          "player4": {
+            "name": " bnjkop",
+            "color": "#00ff1e",
+            "picture": {}
+          }
+        }
+      ],
+      "id": 9
+    }
+  ]
+}
