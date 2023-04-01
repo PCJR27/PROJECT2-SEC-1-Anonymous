@@ -935,7 +935,7 @@ function resetPosition() {
                     <div class="box" id="b10"><img src="../assets/Pic/black-hole-red.png"></div>
 
                 </div>
-                    <p class="turnMessage" ref="turnMessage"></p>
+                    <p class="turnMessage text-white" ref="turnMessage"></p>
             </div>
 
             <div v-show="closeWin">
