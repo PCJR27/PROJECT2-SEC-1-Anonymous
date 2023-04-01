@@ -25,10 +25,10 @@ comp
 ## รหัสนักศึกษา : 64130500045 | ชื่อ-สกุล : นาย นิธิศ วิศยทักษิณ
 หน้าที่ความรับผิดชอบ (20%)
 ---
-Component: Dice, TableGame, Group, GroupManagement<br>
-Js: getGroups<br>
-Json: วางโครงสร้างไฟล์ db.json<br>
-Function: rollDice(), animationRoll(), showPlay(), walk(), move(), resetPosition(), Again(), gotoGame(), addNewGroups()
+- Component: Dice, TableGame, Group, GroupManagement<br>
+- Js: getGroups<br>
+- Json: วางโครงสร้างไฟล์ db.json<br>
+- Function: rollDice(), animationRoll(), showPlay(), walk(), move(), resetPosition(), Again(), gotoGame(), addNewGroups()
 
 
 ## รหัสนักศึกษา : 64130500046 | ชื่อ-สกุล : นาย ปฏิภาณ ศรีตั้งตรง
@@ -42,13 +42,30 @@ Function: rollDice(), animationRoll(), showPlay(), walk(), move(), resetPosition
 - Home => Button HowtoPlay CSS บางส่วนของปุ่ม การจัดหน้า การ Import Font
 - InputUserInfo => จัดทำส่วนรับข้อมูลและ Preview Check Validate Optimize Code ดั้งเดิม
 - TableGames => props หลากหลายตัว get Information from JSON Server เตรียมไฟล์ข้อมูลให้พร้อมสำหรับ Mode ต่างๆ [จากการ Edit Create Play จำเตรียมข้อมมูลของแต่ละ Group ด้วย Function getUserInfo และ checkControler setUserInfo] จัดการการซ่อนตัวหมาก และ Round ของ User ฝั่งซ้ายให้ตรงกับ จำนวน User ที่ Input ข้อมูลเข้ามา [userControl] จัดการ flow ของ Function ด้วย watch ปรับแก้ไข Function หลักของตัวเกมให้รับข้อมูลต่างๆ จาก JSON Server เพื่อเพิ่มประสบการณ์การใช้งานให้ดียิ่งขึ้น bind Color Round ตัวหมาก และการส่งค่า winner ไป 
->< - BinaryPreview (ยกเลิกการใช้งานแล้วเนื่องจากข้อจำกัดของ JSON Server) โดยรวม ออกแบบ และจัดการหน้า page หลากหลายหน้า ในขณะทดสอบการทำงานของ Function มีการทำการส่งค่า props หลายตัวอยู่ ตัดต่อวิดีโอประกอบการนำเสนอ><
+>< - BinaryPreview (ยกเลิกการใช้งานแล้วเนื่องจากข้อจำกัดของ JSON Server) โดยรวม ออกแบบ และจัดการหน้า page หลากหลายหน้า ในขณะทดสอบการทำงานของ Function มีการทำการส่งค่า props หลายตัวอยู่ ><
 
 
 
 ## รหัสนักศึกษา : 64130500049 | ชื่อ-สกุล : นางสาว ปอชา มี้เจริญ
 หน้าที่ความรับผิดชอบ (20%)
 ---
+- Component Dice : ทำเรื่องการขยับลูกเต๋าโดยไม่ใช้dom,การส่งemit
+
+- Component TableGame : ดูเรื่องการส่ง/รับ prop รับemitจาก Component Dice มาใช้งาน เมื่อกดปุ่มRollแล้วจะให้ทำ ทำเรื่องการที่รู้ได้ว่าผู้เล่นคนไหนเป็นคนเดิน ทำโค้ดที่เลือกได้ว่าการเดินนั้นจะเป็นใคร ทำฟังก์ชันการวาร์ป การตั้งค่าsetTimeOut
+
+- Component PopUp : ทำเรื่องการปิดหน้าHowtoPlay PopUp
+- Componenet Nav: ทำเรื่องการปิดเปิดปุ่ม ส่ง emit
+- Component InputUserInfo : ทำ validate เช็คเรื่องการใส่ชื่อแล้วลบเป็น empty string แล้วไม่ให้ส่งค่า และvalidate การเลือกสี ว่าต้องเลือกให้ครบถ้าไม่จะไม่สามารถไปหน้าต่อไปได้ ทำฟังก์ชันที่เก็บข้อมูลที่userใส่เข้ามาแล้วทำการส่งค่าจากemit ไปทำ Add,Edit ไปใช้ที่อีก Component หนึ่ง และการรับส่งค่า prop ทำว่าถ้าเป็นโหมด Edit ให้เปลี่ยนปุ่มเป็น Edit ทั้งหมด และถ้าเป็น โหมด Add ให้เป็นปุ่มComfirmทั้งหมด โดยเช็คว่าถ้ามี Id มาให้เป็น โหมด Edit
+
+- Component Home: ทำการส่งค่า emit เพื่อเปิดปิดหน้าเมื่อมีการกดปุ่ม
+- Component Group:ทำการส่งค่า emit เมื่อกดปุ่ม play edit delete และปุ่ม + แล้วให้ส่งค่าอะไรไปบ้าง รับส่งค่า prop
+- Component GroupManagement : ทำการรับemit ส่งค่า prop ดูเรื่องการFetch POST,PUT ข้อมูล 
+
+- Router : ช่วยดูsyntax ของการใช้งาน router ว่าควรเพิ่มอะไรที่ไหนบ้างเช่นต้อง use ใน main.js ต้องimport RouterLink,RouterView
+
+	- เวลาที่ทำงานแยกกัน จะเป็นคนเอาไฟล์มา merge รวมกันในหลายครั้ง
+	- การวาด Component Diagram เป็นคนสร้างโครงการโยงเส้นว่าควรมีอะไรบ้าง
+	- ทำไฟล์ Readme.md
 
 --- 
 รายการฟีเจอร์ความสามารถของแอป พร้อมคำอธิบาย
@@ -80,7 +97,7 @@ Function: rollDice(), animationRoll(), showPlay(), walk(), move(), resetPosition
 ---
 คู่มือการใช้งานแอปพลิเคชัน
 ---
-
+[LINKคู่มือการใช้งานแอปพลิเคชัน](https://www.youtube.com/watch?v=ZymeJbd2dCk)
 ---
 แหล่งข้อมูลอ้างอิงหรือเป็นแรงบันดาลใจในการพัฒนาแอปพลิเคชัน 
 --
