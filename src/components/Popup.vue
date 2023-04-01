@@ -66,7 +66,7 @@ const onClickPrev = () => {
 <template>
 <div v-show="closeHowto">
             <div class="popup">
-              <div class="fixed top-1/2 left-1/2 transform -twanslate-x-1/2 -translate-y-1/2  w-screen h-screen bg-black opacity-60">
+              <div class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2  w-screen h-screen bg-black opacity-60">
               </div>
           </div>
         <div class="popup">
