@@ -552,20 +552,20 @@ function walk(player, position, direction, numberOfWalk) {
         playerElement.style.top = `${-0 * 70 - direction}px`
     }
 
-    // else if (sum >= 100) {
-    //     if (player == 'player1') {
+    else if (sum >= 100) {
+        if (player == 'player1') {
             
-    //     }
-    //     else if (player == 'player2') {
+        }
+        else if (player == 'player2') {
             
-    //     }
-    //     else if (player == 'player3') {
+        }
+        else if (player == 'player3') {
             
-    //     }
-    //     else if (player == 'player4') {
+        }
+        else if (player == 'player4') {
             
-    //     }
-    // }
+        }
+    }
 
     else {
 
