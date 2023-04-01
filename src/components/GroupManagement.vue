@@ -54,7 +54,6 @@ let addNewGroups = (async (put, newGroup) => {
   }
   else {
     addCall.value='add'
-    editGroup.value = newGroup
     if (showPlay === true){
     needInfo.value = 'needInfo'
   }
@@ -173,7 +172,7 @@ let router=ref(true)
       <div class="flex">
         <div class="w-full flex" id="page4">
           <div class="flex-cols bg-gray-900 w-full">
-            <TableGame :need-info = 'needInfo' :g-id="idToPlay" :user-info="editGroup" :set-id-edit="setEdit" :set-add="addCall"/>
+            <TableGame :need-info = 'needInfo' :g-id="idToPlay" :set-id-edit="setEdit" :set-add="addCall"/>
           </div>
         </div>
       </div>

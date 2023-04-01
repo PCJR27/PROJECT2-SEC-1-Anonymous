@@ -229,6 +229,7 @@ function getPlayerElement(player) {
     let playerElement = null;
     switch(player) {
         case 'player1':
+            //ถ้า player เป็น null ให้ทำ....
             if (!player1) {
                 player1 = p1.value;
             }
@@ -554,16 +555,16 @@ function walk(player, position, direction, numberOfWalk) {
 
     else if (sum >= 100) {
         if (player == 'player1') {
-            
+            return
         }
         else if (player == 'player2') {
-            
+            return
         }
         else if (player == 'player3') {
-            
+            return
         }
         else if (player == 'player4') {
-            
+            return
         }
     }
 
@@ -723,7 +724,7 @@ function resetPosition() {
                     </div>
             
             <div class="mx-auto">
-                <Dice @plays="showPlay" :random="randomNumber"/>
+                <Dice @plays="showPlay"/>
             </div>
         </div>
             <div class="m-auto">

@@ -1,21 +1,21 @@
 {
   "groups": [
     {
-      "groupName": "dff",
-      "numOfPlayer": "3",
+      "groupName": "Group1",
+      "numOfPlayer": "2",
       "member": [
         {
           "player1": {
-            "name": "fdaF",
-            "color": "#d08080"
+            "name": "a",
+            "color": "#c77a7a"
           },
           "player2": {
-            "name": "faF",
-            "color": "#a65454"
+            "name": "b",
+            "color": "#244652"
           },
           "player3": {
-            "name": "afF",
-            "color": "#662e2e"
+            "name": "",
+            "color": ""
           },
           "player4": {
             "name": "",
@@ -26,21 +26,21 @@
       "id": 1
     },
     {
-      "groupName": "asf",
-      "numOfPlayer": "2",
+      "groupName": "Group2",
+      "numOfPlayer": "3",
       "member": [
         {
           "player1": {
-            "name": "fasF",
-            "color": "#783030"
+            "name": "a",
+            "color": "#5149c1"
           },
           "player2": {
-            "name": "fa",
-            "color": "#ba5e5e"
+            "name": "b",
+            "color": "#45a02c"
           },
           "player3": {
-            "name": "",
-            "color": ""
+            "name": "c",
+            "color": "#40280c"
           },
           "player4": {
             "name": "",
@@ -51,54 +51,29 @@
       "id": 2
     },
     {
-      "groupName": "dfszxf",
+      "groupName": "Group3",
       "numOfPlayer": "4",
       "member": [
         {
           "player1": {
-            "name": "dfsdf",
-            "color": "#17184a"
+            "name": "a",
+            "color": "#a33e3e"
           },
           "player2": {
-            "name": "fse",
-            "color": "#c0aaaa"
+            "name": "b",
+            "color": "#38698f"
           },
           "player3": {
-            "name": "fe",
-            "color": "#c67171"
+            "name": "c",
+            "color": "#7d841f"
           },
           "player4": {
-            "name": "efe",
-            "color": "#d87474"
+            "name": "d",
+            "color": "#333f6c"
           }
         }
       ],
       "id": 3
-    },
-    {
-      "groupName": "cdvvsv",
-      "numOfPlayer": "2",
-      "member": [
-        {
-          "player1": {
-            "name": "sdvV",
-            "color": "#092010"
-          },
-          "player2": {
-            "name": "vsdvd",
-            "color": "#582828"
-          },
-          "player3": {
-            "name": "",
-            "color": ""
-          },
-          "player4": {
-            "name": "",
-            "color": ""
-          }
-        }
-      ],
-      "id": 4
     }
   ]
 }
