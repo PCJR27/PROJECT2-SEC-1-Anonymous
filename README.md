@@ -42,7 +42,7 @@ Function: rollDice(), animationRoll(), showPlay(), walk(), move(), resetPosition
 - Home => Button HowtoPlay CSS บางส่วนของปุ่ม การจัดหน้า การ Import Font
 - InputUserInfo => จัดทำส่วนรับข้อมูลและ Preview Check Validate Optimize Code ดั้งเดิม
 - TableGames => props หลากหลายตัว get Information from JSON Server เตรียมไฟล์ข้อมูลให้พร้อมสำหรับ Mode ต่างๆ [จากการ Edit Create Play จำเตรียมข้อมมูลของแต่ละ Group ด้วย Function getUserInfo และ checkControler setUserInfo] จัดการการซ่อนตัวหมาก และ Round ของ User ฝั่งซ้ายให้ตรงกับ จำนวน User ที่ Input ข้อมูลเข้ามา [userControl] จัดการ flow ของ Function ด้วย watch ปรับแก้ไข Function หลักของตัวเกมให้รับข้อมูลต่างๆ จาก JSON Server เพื่อเพิ่มประสบการณ์การใช้งานให้ดียิ่งขึ้น bind Color Round ตัวหมาก และการส่งค่า winner ไป 
->< - BinaryPreview (ยกเลิกการใช้งานแล้วเนื่องจากข้อจำกัดของ JSON Server) โดยรวม ออกแบบ และจัดการหน้า page หลากหลายหน้า ในขณะทดสอบการทำงานของ Function มีการทำการส่งค่า props หลายตัวอยู่ ><
+>< - BinaryPreview (ยกเลิกการใช้งานแล้วเนื่องจากข้อจำกัดของ JSON Server) โดยรวม ออกแบบ และจัดการหน้า page หลากหลายหน้า ในขณะทดสอบการทำงานของ Function มีการทำการส่งค่า props หลายตัวอยู่ ตัดต่อวิดีโอประกอบการนำเสนอ><
 
 
 
