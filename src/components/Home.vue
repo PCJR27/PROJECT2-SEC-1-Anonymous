@@ -1,13 +1,15 @@
 <script setup>
 import Popup from './Popup.vue'
 import {ref} from 'vue'
-// let howToPlayPopup = ref(false)
+import Nav from './Nav.vue'
 let howToPlayPopup = ref('')
 
-const onClose = (value,event) => {
-  console.log(value)
+const onClose = (value) => {
   howToPlayPopup.value = value
-  console.log(playerName);
+}
+
+function popTo(){
+  howToPlayPopup.value++
 }
 
 defineEmits(['close'])
@@ -15,12 +17,12 @@ defineEmits(['close'])
  
 <template>
 <div>
-    <div class="h-screen flex flex-row" id="page1">
-      <div class="w-1/2 h-screen flex justify-center">
+  <div class="h-screen flex flex-row" id="page1" style="color: #A6ADBB;">
+      <div class="w-1/2 h-screen flex justify-center" style="background-color: #2A303C;">
         <div class="flex flex-col my-auto">
           <div style="font-family: researcher;">
             <span style="display: block;letter-spacing:  6px; text-align: center"
-              class="text-6xl lg:text-8xl">GALACTIC</span>
+              class="text-6xl lg:text-8xl" >GALACTIC</span>
             <span style="display: block;letter-spacing: 26px; text-align: center;"
               class="text-xl pl-7 lg:text-2xl ">SERPENT CLIMB</span>
           </div>
@@ -32,11 +34,10 @@ defineEmits(['close'])
             @click="$emit('close',true)">START<i></i></button>
 
             <button class="buttonFirstPage shadow hover:text-pink-500 m-4" style="margin-top: 30px;"
-            @click="howToPlayPopup = 'bigPopup'"><span>HOW TO PLAY</span><i></i></button>
+            @click="popTo"><span>HOW TO PLAY</span><i></i></button>
+            <Nav/>
             <div v-show="howToPlayPopup">
               <Popup :pop-status="howToPlayPopup" @is-close="onClose"/>
-
-      
             </div>
           </div>
         </div>
@@ -60,7 +61,7 @@ defineEmits(['close'])
 }
 
 .shadow :hover {
-  color: #ff1867;
+  color: #1A2B56;
   border-radius: 50px;
   box-shadow: 0 0 45px #ff1867;
 }
@@ -111,6 +112,6 @@ button:hover i::after {
 @font-face {
   font-family: "researcher";
   src: local("researcher"),
-    url(./assets/Font/researcher/researcher-researcher-bold-700.otf) format("truetype");
+    url(../assets/Font/researcher/researcher-researcher-bold-700.otf) format("truetype");
 }
 </style>

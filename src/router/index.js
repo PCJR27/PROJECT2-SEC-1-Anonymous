@@ -6,14 +6,10 @@ const router = createRouter({
   history: createWebHistory(),
   routes: [
     {
-        path:'/home',
+        path:'/',
         name:'Home',
         component:Home
     },
-    // {
-    //   path: '/',
-    //   redirect: '/home'
-    // },
     {
       path: '/aboutus',
       name: 'About',
@@ -30,4 +26,3 @@ const router = createRouter({
   linkActiveClass: 'text-green-500'
 })
 export default router
-// https://router.vuejs.org/api/interfaces/RouterOptions.html#Properties-linkActiveClass

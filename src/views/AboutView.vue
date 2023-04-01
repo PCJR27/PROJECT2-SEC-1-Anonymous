@@ -29,42 +29,41 @@ let teamInfo = [
   nickName : "POR",
   name : 'Porcha Meecharoen',
   id : '64130500049',
-  pic: './Team/Por.jpg'
+  pic: './Team/Porcha.jpg'
 },
-
 ]
-
 
 defineEmits(['close'])
 </script>
  
 <template>
-<div class=" flex flex-col">
-
-
-
-<div class=" m-auto bg-slate-500 ">
-  <p class=" text-5xl text-black">About My Team</p>
-</div>
-
-  <div class=" flex flex-row bg-slate-400  w-screen h-screen" >
-    <div class=" w-1/5 h-2/3 rounded-xl bg-blue-300 my-auto m-5" v-for="item in teamInfo">
-      <img class="object-cover w-screen h-1/2 rounded-xl" :src="item.pic">
-      <div class="flex flex-col mt-auto">
-      <p class="text-7xl">{{ item.nickName }}</p>
-      <p class="text-xl">{{ item.name }}</p>
-      <p class="text-xl ">{{ item.id }}</p>
+  <div class="flex flex-col items-center justify-center h-screen" style="background-color: #2A303C;color: #A6ADBB;">
+    <div class="mt-10">
+      <p class="text-6xl font-researcher " style="font-family: researcher;color: #A6ADBB;">About My Team</p>
+    </div>
+    <div class="flex flex-row justify-center w-full h-4/5 ">
+      <div v-for="item in teamInfo" class="w-1/5 h-2/3 rounded-xl my-auto m-5" style="background-color: #19202E;">
+        <img class="object-cover w-full h-1/2 rounded-xl" :src="item.pic" alt="team member picture">
+        <div class="flex flex-col mt-auto">
+          <p class="text-6xl my-10 mx-auto font-researcher" style="font-family: researcher;">{{ item.nickName }}</p>
+          <p class="text-2xl ml-5">{{ item.name }}</p>
+          <p class="text-xl ml-5">{{ item.id }}</p>
+        </div>
       </div>
     </div>
+    <div class="mb-10">
+      <router-link :to="{ name: 'Home' }">
+        <button class=" hover:bg-red-400 transition duration-500 ease-in-out text-white rounded-full text-2xl px-8 py-2 bg-gray-600">HOME</button>
+      </router-link>
+    </div>
   </div>
-  <div class="m-auto">
-  <RouterLink :to="{name:'Home'}">
-    <button class="bg-black text-white rounded-full text-2xl" @click="$emit('close',true)">Home</button>
-  </RouterLink>
-  </div>
-</div>
 </template>
  
 <style scoped>
+@font-face {
+  font-family: "researcher";
+  src: local("researcher"),
+    url(./../assets/Font/researcher/researcher-researcher-bold-700.otf) format("truetype");
+}
 
 </style>

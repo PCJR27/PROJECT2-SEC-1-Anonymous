@@ -1,41 +1,79 @@
 {
   "groups": [
     {
-      "groupName":"astronaut team",
-      "numOfPlayer":"2",
+      "groupName": "Demo",
+      "numOfPlayer": "3",
       "member": [
         {
           "player1": {
-            "name": "Ou1",
-            "color": "red",
-            "picture": "{}"
+            "name": "Player1",
+            "color": "#5a1c00"
           },
           "player2": {
-            "name": "Ou2",
-            "color": "blue",
-            "picture": "{}"
+            "name": "Player2",
+            "color": "#0433ff"
+          },
+          "player3": {
+            "name": "Player3",
+            "color": "#ff6251"
+          },
+          "player4": {
+            "name": "",
+            "color": ""
           }
         }
-        
-      ]
+      ],
+      "id": 1
     },
     {
-      "groupName":"alien team",
-      "numOfPlayer":"2",
+      "groupName": "fwefef",
+      "numOfPlayer": "2",
       "member": [
         {
-          "player1":{
-            "name": "Neng",
-            "color": "red",
-            "picture": "{}"
+          "player1": {
+            "name": "wefewfwe",
+            "color": "#9b5f5f"
           },
           "player2": {
-            "name": "Neng2",
-            "color": "blue",
-               "picture": "{}"
+            "name": "fwefewf",
+            "color": "#000000"
+          },
+          "player3": {
+            "name": "",
+            "color": ""
+          },
+          "player4": {
+            "name": "",
+            "color": ""
           }
         }
-      ]
+      ],
+      "id": 3
+    },
+    {
+      "groupName": "Demo",
+      "numOfPlayer": "4",
+      "member": [
+        {
+          "player1": {
+            "name": "Player1",
+            "color": "#7b219f"
+          },
+          "player2": {
+            "name": "Player2",
+            "color": "#371a94"
+          },
+          "player3": {
+            "name": "Player3",
+            "color": "#ff40ff"
+          },
+          "player4": {
+            "name": "Player4",
+            "color": "#b51a00"
+          }
+        }
+      ],
+      "id": 4
     }
   ]
 }

@@ -1,6 +1,5 @@
 <script setup>
-import { inject, provide, ref, computed } from 'vue'
-import TableGame from './TableGame.vue'
+import { ref } from 'vue'
 
 const props = defineProps({
     playNum: {
@@ -15,14 +14,6 @@ const props = defineProps({
 defineEmits(['plays'])
 let diceRef = ref('')
 let randomNum = ref('0')
-console.log(rollDice())
-
-// function ranDom() {
-//     let number = Math.floor(Math.random() * 6 + 1)
-//     // randomNum.value = number
-//     return number
-// }
-
 
 // ต้องเรียกใช้ก่อน ไม่งั้นplayerคนแรกในturnแรกจะไม่เดิน เพราะrandomNum = 0
 rollDice()
@@ -30,22 +21,10 @@ rollDice()
 function rollDice(){
     let number =  Math.floor(Math.random() * 6 + 1)
     randomNum.value = number
-
     return number
 }
 
-
-// function rollDice() {
-//     let number = ranDom()
-//     randomNum.value = number
-//     console.log(number)
-//     console.log(randomNum.value)
-//     return number
-// }
-
-
 function animationRoll(number) {
-    // console.log(e.target)
     setTimeout(() => {
         switch (number) {
             case 1:
@@ -74,11 +53,8 @@ function animationRoll(number) {
 </script>
  
 <template>
-    <div class="w-full ml-24">
-        <div class="flex w-full container pt-10 pb-10 rounded-2xl  m-auto">
-            <!-- <div>
-                <p class="text-xl text-black">{{ randomNum}}</p>
-            </div> -->
+    <div class="w-full">
+        <div class="flex container rounded-2xl m-auto">
             <div class="dice" ref="diceRef">
                 <div class="face front"></div>
                 <div class="face back"></div>
@@ -89,8 +65,7 @@ function animationRoll(number) {
             </div>
 
             <div class="flex">
-                <!-- <button @click="rollDice">Roll</button> -->
-                <button id="but" class="text-black bg-blue-400 rounded-full mt-10 pt-1 pb-1 pl-2 pr-2" @click="$emit('plays', rollDice, randomNum, animationRoll, $event)">Roll</button>
+                <button id="but" class="text-black bg-white hover:bg-red-400 transition duration-500 ease-in-out rounded-full mt-10 py-2 px-8" @click="$emit('plays', rollDice, randomNum, animationRoll, $event)">ROLL</button>
             </div>
         </div>
     </div>
@@ -111,8 +86,6 @@ function animationRoll(number) {
     place-items: center;
     width: 250px;
     padding: 60px 0 40px;
-    border-radius: 30px;
-    /* background: #eeeeee; */
     background: #AEAEAE;
     box-shadow: 0 0 20px rgba(0, 0, 0, .1);
 }

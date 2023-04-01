@@ -6,7 +6,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "backend": "json-server --watch ./data/group-info.json --port 3000"
+    "backend": "json-server --watch ./data/db.json --port 3000"
   },
   "dependencies": {
     "daisyui": "^2.51.3",
