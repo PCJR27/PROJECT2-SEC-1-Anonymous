@@ -5,7 +5,7 @@
 - มีการทำไฟล์ getGroups.js
 - db.json => ช่วยออกแบบโครงสร้างการเก็บข้อมูล
 - Component Dice => ทำส่วนของCss และ Templete
-- Component TableGame => มีการส่วนในการออกแบบตารางเกม แล้ว ทำ function Again,function resetPosition และมีการทำในส่วนของSettimeoutของการวาร์ป
+- Component TableGame => มีส่วนในการออกแบบตารางเกม แล้ว ทำ function Again,function resetPosition และมีการทำในส่วนของSettimeoutของการวาร์ป
 - Component Group =>  ทำ function deleteGroup (แต่ถูกแก้ไขไปแล้ว)
 - Component InputUserInfo => ทำOnMounted,ช่วยทำValidate
 - Component GroupManagemant => ทำaddNewGroupsแลmodifyGroup แต่มีการถูกแก้ไขไปแล้ว
