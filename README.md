@@ -25,10 +25,15 @@ comp
 ## รหัสนักศึกษา : 64130500045 | ชื่อ-สกุล : นาย นิธิศ วิศยทักษิณ
 หน้าที่ความรับผิดชอบ (20%)
 ---
-- Component: Dice, TableGame, Group, GroupManagement<br>
-- Js: getGroups<br>
-- Json: วางโครงสร้างไฟล์ db.json<br>
-- Function: rollDice(), animationRoll(), showPlay(), walk(), move(), resetPosition(), Again(), gotoGame(), addNewGroups()
+- ทำไฟล์ getGroups.js
+- วางโครงสร้างไฟล์ db.json ที่ใช้เก็บข้อมูลกลุ่มของผู้เล่นว่า กลุ่มชื่ออะไร มีผู้เล่นกี่คน แต่ละคนชื่ออะไรและตัวหมากใช้สีอะไร
+- Component Dice => ทำfunction  rollDice(), animationRoll()
+- Component TableGame => จัดelement, ทำfunction callPlay(), walk(), move(), showPlay(), Again(), resetPosition()
+- Component Popup => วางโครงpopupของHow to Play, ทำfunction gotoHome() ที่อยู่ในpopup closeWinner	
+- Component Home => แก้ปุ่มAbout us
+- Component AboutView => แก้ไขelement
+- Component GroupManagement => ทำfunction addNewGroups()(ถูกแก้ไขไปแล้ว), editGroup() (ถูกแก้ไขและเปลี่ยนชื่อเป็นmodifyGroup())
+- Component Groups => ทำfunction deleteGroup()(ถูกแก้ไขไปแล้ว)
 
 
 ## รหัสนักศึกษา : 64130500046 | ชื่อ-สกุล : นาย ปฏิภาณ ศรีตั้งตรง
