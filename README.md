@@ -14,12 +14,12 @@
 ## รหัสนักศึกษา : 64130500033 | ชื่อ-สกุล : นาย ธนวัฒน์ เฉิน
 หน้าที่ความรับผิดชอบ (20%)
 ---
-router
-- ทำ router เชื่อมไปยัง aboutView(view),NotFoundview(view) และ home(comp) 
-view
+ #### router 
+- ทำ router เชื่อมไปยัง aboutView(view),NotFoundview(view) และ home(comp) <br>
+#### view
 - AboutView จัดหน้า ,ปุ่ม home(router link)
-- NotFoundview จัดหน้า
-comp
+- NotFoundview จัดหน้า<br>
+#### comp
 - Dice จัดหน้า
 - Nav ทำปุ่ม about us(router link)
 - Popup จัดหน้า how to play กับ winner , ปุ่มปิดหน้า how to play
@@ -125,6 +125,8 @@ comp
     * การดูการเปลี่ยนแปลงของค่าแล้วอยากให้ทำงาน การใช้ watch() in vue
       * ref: https://vuejs.org/api/reactivity-core.html#watch
 
+* Video Link
+https://youtu.be/ZymeJbd2dCk
 
 
 
