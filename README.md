@@ -2,7 +2,15 @@
 ## รหัสนักศึกษา : 64130500025 | ชื่อ-สกุล : นาย เตชธรรม กาญจนสุทธากุล
 หน้าที่ความรับผิดชอบ (20%)
 ---
-
+- มีการทำไฟล์ getGroups.js
+- db.json => ช่วยออกแบบโครงสร้างการเก็บข้อมูล
+Component
+- Dice => ทำส่วนของCss และ Templete
+- TableGame => มีการส่วนในการออกแบบตารางเกม แล้ว ทำ function Again,function resetPosition และมีการทำในส่วนของSettimeoutของการวาร์ป
+- Group =>  ทำ function deleteGroup (แต่ถูกแก้ไขไปแล้ว)
+- InputUserInfo => ทำOnMounted,ช่วยทำValidate
+- GroupManagemant => ทำaddNewGroupsแลmodifyGroup แต่มีการถูกแก้ไขไปแล้ว
+- Popup => ทำเรื่องกดปุ่มplayAgainแล้วจะส่งค่า emit
 
 ## รหัสนักศึกษา : 64130500033 | ชื่อ-สกุล : นาย ธนวัฒน์ เฉิน
 หน้าที่ความรับผิดชอบ (20%)
