@@ -43,11 +43,6 @@ onMounted( ()=> {
 
   }
 
-  else {
-    updateGroup.value = props.moregroup
-
-  }
-
 })
 
 
@@ -117,7 +112,7 @@ watch(setId, editOrCreate)
             <p class="text-center pb-4 text-2xl">Choose the number of players</p>
             <label for="underline_select" class="sr-only text-white">Underline select</label>
             <select v-model="updateGroup.numOfPlayer" 
-              class="block appearance-none border-gray-400 text-black hover:border-gray-500 px-4 py-2 pr-8 rounded-full shadow">
+              class="block appearance-none border-gray-400 text-black hover:border-gray-500 px-4 py-2 pr-8 rounded-full shadow bg-white">
               <option value=2> 2 Person</option>
               <option value=3> 3 Person</option>
               <option value=4> 4 Person</option>
@@ -150,7 +145,7 @@ watch(setId, editOrCreate)
 
         <div class="flex flex-row">
           <div class="w-1/2 p-5 text-3xl">
-            <p class=" text-3xl">Group Name : <input class="rounded-full w-1/2  p-1 m-2 mr-10 text-black border text-xl border-gray-400 hover:border-gray-500" type="text"
+            <p class=" text-3xl">Group Name : <input class="rounded-full w-1/2  p-1 m-2 mr-10 text-black border text-xl border-gray-400 hover:border-gray-500 bg-white" type="text"
             placeholder="Group Name" v-model="updateGroup.groupName"></p>
             
           </div>
@@ -166,7 +161,7 @@ watch(setId, editOrCreate)
         <div class="flex flex-row" v-for="(item, index) in playerArr " :key="index">
           <div class="w-1/2 p-5 text-3xl">
             <p class=" text-3xl">{{ item }}</p>
-            <input class="rounded-full w-1/2 p-1 m-2 mr-10 text-black border text-xl border-gray-400 hover:border-gray-500" type="text"
+            <input class="rounded-full w-1/2 p-1 m-2 mr-10 text-black border text-xl border-gray-400 hover:border-gray-500 bg-white" type="text"
               placeholder="Player Name" v-model="updateGroup.member[index].name">
             <input class="" type="color" v-model="updateGroup.member[index].color">
           </div>
@@ -186,7 +181,7 @@ watch(setId, editOrCreate)
           <p class="text-red-600 text-bold text-xl">{{ errorMes}}</p>
           <button v-if="setId"  ref='edit' class="font-bold bg-white m-10 pt-2 pb-2 w-1/12 rounded-full text-black hover:bg-red-400 transition duration-500 ease-in-out"
             @click="$emit('edit',updateGroup,setId)">EDIT</button>
-          <button v-else  ref='add' class="font-bold bg-white m-10 pt-2 pb-2 w-1/12 rounded-full text-black hover:bg-red-400 transition duration-500 ease-in-out"
+          <button v-else class="font-bold bg-white m-10 pt-2 pb-2 w-1/12 rounded-full text-black hover:bg-red-400 transition duration-500 ease-in-out"
             @click="$emit('add', updateGroup)">COMFIRM</button>
         </div>
       </div>

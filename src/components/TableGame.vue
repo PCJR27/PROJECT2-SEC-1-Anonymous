@@ -77,14 +77,10 @@ watch(editId,checkControler)
 let whoTurn = ref('')
 
 let winnerIs = ref('')
-const showPlay=(rollDice,randomNum,animationRoll,e)=>{
+const showPlay=(rollDice,randomNum,animationRoll)=>{
     random.value=randomNum
     rollDice()
-    getUserInfo()
-    
-    if(e.target.id=='but'){
-        animationRoll(randomNum)
-    }
+    animationRoll(randomNum)
     callPlay()
     
 }

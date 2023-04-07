@@ -55,7 +55,7 @@ function animationRoll(number) {
             </div>
 
             <div class="flex">
-                <button id="but" class="text-black bg-white hover:bg-red-400 transition duration-500 ease-in-out rounded-full mt-10 py-2 px-8" @click="$emit('plays', rollDice, randomNum, animationRoll, $event)">ROLL</button>
+                <button id="but" class="text-black bg-white hover:bg-red-400 transition duration-500 ease-in-out rounded-full mt-10 py-2 px-8" @click="$emit('plays', rollDice, randomNum, animationRoll)">ROLL</button>
             </div>
         </div>
     </div>

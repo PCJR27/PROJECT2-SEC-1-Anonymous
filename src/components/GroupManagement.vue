@@ -22,7 +22,7 @@ const onShowAdd = (but, set) => {
 
 const editItem = ref()
 const editId=ref()
-const onShowEdit = ( item, id,set) => {
+const onShowEdit = (item, id,set) => {
     addGroup.value = set
     groupShow.value = !set
     editItem.value = item
@@ -195,7 +195,7 @@ let router=ref(true)
     <RouterView @close="showGroup"/> 
   </div>
     <div v-show="groupShow">
-      <Group @on-show="onShowAdd" @onEdit="onShowEdit" @onPlay="gotoGame" />
+      <Group @onShow="onShowAdd" @onEdit="onShowEdit" @onPlay="gotoGame" />
     </div>
     <div v-show="addGroup">
       <InputUserInfo @show-play="playShow" @add="addNewGroups" :set-id-edit="editId" :moregroup="editItem" @edit="modifyGroup" :error="errorMes" />
