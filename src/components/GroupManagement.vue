@@ -6,15 +6,14 @@ import { RouterView } from 'vue-router'
 import { ref } from 'vue';
 
 const groups = ref([])
-let needInfo = ref('')
 let groupShow = ref(false)
 let addGroup = ref(false)
 let showPlay = ref(false)
 let numOfPlayer = ref()
 let setIdEdit = ref()
+
 const onShowAdd = (but, set) => {
   setIdEdit.value = set
-  console.log(setIdEdit)
   if (but === 'add') {
     addGroup.value = true
     groupShow.value = set
@@ -28,7 +27,6 @@ const onShowEdit = ( item, id,set) => {
     groupShow.value = !set
     editItem.value = item
     editId.value=id
-    console.log(editItem.value)
 
 }
 
@@ -44,19 +42,34 @@ const showGroup = (show) => {
 
 }
 
-let editGroup = ref()
 let addCall=ref()
-let addNewGroups = (async (put, newGroup) => {
-  put()
-  if(newGroup.numOfPlayer==''){
-  showPlay.value = false
-  addGroup.value = true
+let errorMes =ref()
+let finish=ref()
+let addNewGroups = (async (newGroup) => {
+
+  if (newGroup.numOfPlayer !== null || newGroup.numOfPlayer  !== undefined) {
+for (let index =0;index<newGroup.numOfPlayer;index++){
+    if (newGroup.groupName=='') {
+    errorMes.value = 'Enter Your Group Name.'
+    return
   }
-  else {
+  else if (newGroup.member[index].name=='') {
+    errorMes.value = 'Enter Your Name'
+    return
+  }
+    else if (newGroup.member[index].color=='') {
+    errorMes.value = 'Enter Your Color'
+    return
+  }
+
+
+
+} 
+finish.value=true
+}
+
+if(finish.value===true) {
     addCall.value='add'
-    if (showPlay === true){
-    needInfo.value = 'needInfo'
-  }
   try {
     const res = await fetch('http://localhost:3000/groups', {
       method: "POST",
@@ -74,7 +87,6 @@ let addNewGroups = (async (put, newGroup) => {
     if (res.status === 201) {
       const addNewGroups = await res.json()
       groups.value.push(addNewGroups)
-      console.log(newGroup)
     }
     else {
       throw Error('cannot add!!')
@@ -87,22 +99,45 @@ let addNewGroups = (async (put, newGroup) => {
 
   showPlay.value = true
   addGroup.value = false
-
 }
+
+else {
+      showPlay.value = false
+      addGroup.value = true
+
+  }
+  
+  
 })
 defineEmits(['playerControl'])
 
 let setEdit=ref()
-let modifyGroup = (async (validate, edit,setId) => {
-validate()
-if(edit.numOfPlayer==''){
-  showPlay.value = false
-  addGroup.value = true
+let modifyGroup = (async (edit,setId) => {
+
+if (edit.numOfPlayer !== null || edit.numOfPlayer  !== undefined) {
+for (let index =0;index<edit.numOfPlayer;index++){
+    if (edit.groupName=='') {
+    errorMes.value = 'Enter Your Group Name.'
+    return
   }
-  else {
-setEdit.value=setId
-console.log(`+++++${setId}`)
-  console.log(edit)
+  else if (edit.member[index].name=='') {
+    errorMes.value = 'Enter Your Name'
+    return
+  }
+    else if (edit.member[index].color=='') {
+    errorMes.value = 'Enter Your Color'
+    return
+  }
+
+
+
+} 
+finish.value=true
+}
+if(finish.value==true){
+  showPlay.value = true
+  addGroup.value = false
+  setEdit.value=setId
   try {
     const res = await fetch(`http://localhost:3000/groups/${setId}`, {
       method: "PUT",
@@ -136,9 +171,12 @@ console.log(`+++++${setId}`)
   catch (err) {
     console.log(err)
   }
+  }
+else {
 
-  showPlay.value = true
-  addGroup.value = false
+  showPlay.value = false
+  addGroup.value = true
+
 }
 })
 let idToPlay=ref()
@@ -146,7 +184,6 @@ const gotoGame=(id,set)=>{
 idToPlay.value=id
 showPlay.value=set
 groupShow.value=!set
-console.log(id)
 }
 
 let router=ref(true)
@@ -154,25 +191,20 @@ let router=ref(true)
  
 <template>
  <div class="flex flex-col">
-    <!-- PAGE 1 -->
     <div v-show="router">
     <RouterView @close="showGroup"/> 
   </div>
-    <!-- PAGE 1 -->
-    <!-- PAGE 1.5 -->
     <div v-show="groupShow">
       <Group @on-show="onShowAdd" @onEdit="onShowEdit" @onPlay="gotoGame" />
     </div>
-
     <div v-show="addGroup">
-      <InputUserInfo @show-play="playShow" @add="addNewGroups" :set-id-edit="editId" :moregroup="editItem" @edit="modifyGroup" />
+      <InputUserInfo @show-play="playShow" @add="addNewGroups" :set-id-edit="editId" :moregroup="editItem" @edit="modifyGroup" :error="errorMes" />
     </div>
-    <!-- PAGE 2 -->
     <div v-show="showPlay">
       <div class="flex">
         <div class="w-full flex" id="page4">
           <div class="flex-cols bg-gray-900 w-full">
-            <TableGame :need-info = 'needInfo' :g-id="idToPlay" :set-id-edit="setEdit" :set-add="addCall"/>
+            <TableGame :g-id="idToPlay" :set-id-edit="setEdit" :set-add="addCall"/>
           </div>
         </div>
       </div>

@@ -17,9 +17,6 @@ function checkGroup(){
     }
   }
 
-const props = defineProps({
-  moreGroup: { type: Object }
-})
 
 const deleteGroup= async (deleteId)=>{
  try{
@@ -40,11 +37,11 @@ if(res.ok){
 console.log(err)
  }
 }
-defineEmits(['onShow', 'onEdit', 'onDelete','onPlay'])
+defineEmits(['onShow', 'onEdit','onPlay'])
 </script>
  
 <template>
-<div class="flex flex-col h-screen" style="background-color: #2A303C;color: #A6ADBB;">
+<div class="flex flex-col h-screen" style="background-color: #2A303C;color: #A6ADBB">
     <div>
         <h1 class=" text-center text-6xl m-10" style="font-family: researcher;">Choose Your Group</h1>
     </div>

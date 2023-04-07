@@ -1,21 +1,11 @@
 <script setup>
 import { ref } from 'vue'
 
-const props = defineProps({
-    playNum: {
-        type: Number
-    },
-    play: {
-        type: Function
-    }
-    
-})
-
 defineEmits(['plays'])
 let diceRef = ref('')
 let randomNum = ref('0')
 
-// ต้องเรียกใช้ก่อน ไม่งั้นplayerคนแรกในturnแรกจะไม่เดิน เพราะrandomNum = 0
+
 rollDice()
 
 function rollDice(){

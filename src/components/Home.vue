@@ -4,10 +4,6 @@ import {ref} from 'vue'
 import Nav from './Nav.vue'
 let howToPlayPopup = ref('')
 
-const onClose = (value) => {
-  howToPlayPopup.value = value
-}
-
 function popTo(){
   howToPlayPopup.value++
 }
@@ -37,7 +33,7 @@ defineEmits(['close'])
             @click="popTo"><span>HOW TO PLAY</span><i></i></button>
             <Nav/>
             <div v-show="howToPlayPopup">
-              <Popup :pop-status="howToPlayPopup" @is-close="onClose"/>
+              <Popup :pop-status="howToPlayPopup"/>
             </div>
           </div>
         </div>

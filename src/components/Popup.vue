@@ -20,17 +20,15 @@ const props = defineProps({
     }
 })
 let closeHowto  = ref(false)
-let win = ref('')
 let closeWinner = ref(false)
 let popupStatus = computed(()=> props.popStatus) 
 let popupWinner = computed(()=>props.winnerIs) 
 
 function popupControl(){
-    if (popupStatus.value >0){closeHowto.value = true
+    if (popupStatus.value > 0){closeHowto.value = true
     }
     if (popupWinner.value !== 'noWin' ){
         closeWinner.value =  true
-        win.value = popupWinner.value
     }
 }
 watch (popupStatus,popupControl)
@@ -97,7 +95,7 @@ const onClickPrev = () => {
             <div class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  w-1/3 h-5/6 bg-white rounded-xl">
                 <div class="top-10">
                     <p class="text-black text-center text-4xl  mt-16 ">THE WINNER IS</p>
-                    <p class="text-center text-6xl  mt-16 text-purple-700">{{ win }}</p>
+                    <p class="text-center text-6xl  mt-16 text-purple-700">{{ popupWinner }}</p>
                 </div>
                 <div class="">
                     <img class="w-1/2 m-auto mt-20" src="./../assets/Pic/trophy.png" alt="">

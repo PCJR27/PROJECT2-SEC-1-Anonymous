@@ -7,10 +7,6 @@ const userInfo = ref([])
 
 
 const props = defineProps({
-needInfo:{
-        type:String,
-        default:null
-    },
     gId: { 
         type:Number,
         default:null
@@ -28,7 +24,6 @@ needInfo:{
 })
 let editId = computed(() => props.setIdEdit)
 let groupId = computed(()=> props.gId)
-let editSet=computed(()=> props.setIdEdit)
 let addSet=computed(()=>props.setAdd)
 
 let singleGroup
@@ -60,21 +55,22 @@ async function  checkControler(){
 
 function setUserInfo(){
     for (let item of singleGroup){
-    color1.value = item.member[0].player1.color
-    color2.value = item.member[0].player2.color
-    color3.value = item.member[0].player3.color
-    color4.value = item.member[0].player4.color
+    color1.value = item.member[0].color
+    color2.value = item.member[1].color
+    color3.value = item.member[2].color
+    color4.value = item.member[3].color
+
+
 
     playerNum.value = item.numOfPlayer
 
-    playerName[0] = (item.member[0].player1.name) 
-    playerName[1] = (item.member[0].player2.name) 
-    playerName[2] = (item.member[0].player3.name) 
-    playerName[3] = (item.member[0].player4.name) 
+    playerName[0] = (item.member[0].name) 
+    playerName[1] = (item.member[1].name) 
+    playerName[2] = (item.member[2].name) 
+    playerName[3] = (item.member[3].name) 
   } 
 }
 watch(groupId,checkControler)
-watch(editSet,checkControler)
 watch(addSet,checkControler)
 watch(editId,checkControler)
 
@@ -142,8 +138,6 @@ function callPlay() {
     if (playerNum.value == 2) {
         if (turn % 2 != 0) {
             turnMessage.value.innerText = 'Turn :'+playerName[0]
-            console.log('Purple walk =' + random.value)
-            console.log('Purple walk =' + randomNumber.value)
             walk('player1', 'position1', 20, randomNumber.value)
             setTimeout(() => {
                 move('player1', position1, 20)
@@ -263,39 +257,33 @@ function walk(player, position, direction, numberOfWalk) {
     if (position == 'position1') {
         position1 = position1 + numberOfWalk
        if (position1 == 1) {
-            position1 = 1
             setTimeout(() => {
                 position1 = 38
             }, 500)
         }
         if (position1 == 4) {
-            position1 = 4
             setTimeout(() => {
                 position1 = 57
             }, 500)
         }
         if (position1 == 8) {
-            position1 = 8
             setTimeout(() => {
                 position1 = 30
             }, 500)
 
         }
         if (position1 == 21) {
-            position1 = 21
             setTimeout(() => {
                 position1 = 42
             }, 500)
         }
         if (position1 == 28) {
-            position1 = 28
             setTimeout(() => {
-                position1 = 76
+                position1 = 70
             }, 500)
 
         }
         if (position1 == 50) {
-            position1 = 50
             setTimeout(() => {
                 position1 = 88
             }, 500)
@@ -303,25 +291,21 @@ function walk(player, position, direction, numberOfWalk) {
 
    
         if (position1 == 32) {
-            position1 = 32
             setTimeout(() => {
                 position1 = 10
             }, 500)
         }
         if (position1 == 36) {
-            position1 = 36
             setTimeout(() => {
                 position1 = 15
             }, 500)
         }
         if (position1 == 75) {
-            position1 = 75
             setTimeout(() => {
                 position1 = 18
             }, 500)
         }
         if (position1 == 80) {
-            position1 = 80
             setTimeout(() => {
                 position1 = 54
             }, 500)
@@ -332,64 +316,54 @@ function walk(player, position, direction, numberOfWalk) {
     if (position == 'position2') {
         position2 = position2 + numberOfWalk
          if (position2 == 1) {
-            position2 = 1
             setTimeout(() => {
                 position2 = 38
             }, 500)
         }
         if (position2 == 4) {
-            position2 = 4
             setTimeout(() => {
                 position2 = 57
             }, 500)
         }
         if (position2 == 8) {
-            position2 = 8
             setTimeout(() => {
                 position2 = 30
             }, 500)
 
         }
         if (position2 == 21) {
-            position2 = 21
             setTimeout(() => {
                 position2 = 42
             }, 500)
         }
         if (position2 == 28) {
-            position2 = 28
             setTimeout(() => {
-                position2 = 76
+                position2 = 70
             }, 500)
 
         }
         if (position2 == 50) {
-            position2 = 50
             setTimeout(() => {
                 position2 = 88
             }, 500)
         }
 
         if (position2 == 32) {
-            position2 = 32
             setTimeout(() => {
                 position2 = 10
             }, 500)
         }
         if (position2 == 36) {
-            position2 = 36
             setTimeout(() => {
                 position2 = 15
             }, 500)
         }
         if (position2 == 75) {
-            position2 = 75
             setTimeout(() => {
                 position2 = 18
             }, 500)
         }
         if (position2 == 80) {
-            position2 = 80
             setTimeout(() => {
                 position2 = 54
             }, 500)
@@ -400,39 +374,33 @@ function walk(player, position, direction, numberOfWalk) {
     if (position == 'position3') {
         position3 = position3 + numberOfWalk
         if (position3 == 1) {
-            position3 = 1
             setTimeout(() => {
                 position3 = 38
             }, 500)
         }
         if (position3 == 4) {
-            position3 = 4
             setTimeout(() => {
                 position3 = 57
             }, 500)
         }
         if (position3 == 8) {
-            position3 = 8
             setTimeout(() => {
                 position3 = 30
             }, 500)
 
         }
         if (position3 == 21) {
-            position3 = 21
             setTimeout(() => {
                 position3 = 42
             }, 500)
         }
         if (position3 == 28) {
-            position3 = 28
             setTimeout(() => {
-                position3 = 76
+                position3 = 70
             }, 500)
 
         }
         if (position3 == 50) {
-            position3 = 50
             setTimeout(() => {
                 position3 = 88
             }, 500)
@@ -440,25 +408,21 @@ function walk(player, position, direction, numberOfWalk) {
 
         
         if (position3 == 32) {
-            position3 = 32
             setTimeout(() => {
                 position3 = 10
             }, 500)
         }
         if (position3 == 36) {
-            position3 = 36
             setTimeout(() => {
                 position3 = 15
             }, 500)
         }
         if (position3 == 75) {
-            position3 = 75
             setTimeout(() => {
                 position3 = 18
             }, 500)
         }
         if (position3 == 80) {
-            position3 = 80
             setTimeout(() => {
                 position3 = 54
             }, 500)
@@ -469,83 +433,65 @@ function walk(player, position, direction, numberOfWalk) {
     if (position == 'position4') {
         position4 = position4 + numberOfWalk
         if (position4 == 1) {
-            position4 = 1
             setTimeout(() => {
                 position4 = 38
-                console.log(position1)
             }, 500)
         }
         if (position4 == 4) {
-            position4 = 4
             setTimeout(() => {
-                position4 = 14
+                position4 = 57
             }, 500)
 
         }
         if (position4 == 8) {
-            position4 = 8
             setTimeout(() => {
                 position4 = 30
-                console.log(position1)
             }, 500)
         }
         if (position4 == 21) {
-            position4 = 21
             setTimeout(() => {
-                position1 = 42
-                console.log(position1)
+                position4 = 42
             }, 500)
         }
         if (position4 == 28) {
-            position4 = 28
             setTimeout(() => {
-                position4 = 76
-                console.log(position1)
+                position4 = 70
             }, 500)
-        }
-        if (position4 == 32) {
-            position4 = 32
-            setTimeout(() => {
-                position1 = 10
-                console.log(position1)
-            }, 2000)
-        }
-        if (position4 == 36) {
-            position4 = 36
-            setTimeout(() => {
-                position4 = 6
-                console.log(position1)
-            }, 500)
-
-        }
-        if (position4 == 48) {
-            position4 = 48
-            setTimeout(() => {
-                position4 = 26
-                console.log(position4)
-            }, 500)
-
         }
         if (position4 == 50) {
-            position4 = 50
             setTimeout(() => {
-                position4 = 67
+                position4 = 88
             }, 500)
         }
-        if (position4 == 62) {
-            position = 62
+
+        if (position4 == 32) {
+            setTimeout(() => {
+                position4 = 10
+            }, 500)
+        }
+        if (position4 == 36) {
+            setTimeout(() => {
+                position4 = 15
+            }, 500)
+
+        }
+        if (position4 == 75) {
             setTimeout(() => {
                 position4 = 18
+            }, 500)
+
+        }
+        if (position4 == 80) {
+            setTimeout(() => {
+                position4 = 54
             }, 500)
         }
         
         sum = position4
     }
-    // it is get element by id.
+    
     let playerElement=getPlayerElement(player)
     if(playerElement){
-    console.log(playerElement)
-    console.log(sum)
     playerElement.style.transition = `linear all .5s`
     
     if (sum < 10) {
@@ -573,7 +519,6 @@ function walk(player, position, direction, numberOfWalk) {
         let numarr = Array.from(String(sum))
         let n1 = numarr.shift()
         let n2 = numarr.pop()
-        console.log(n1, n2)
 
         if (n1 % 2 != 0) {
 
@@ -610,8 +555,6 @@ function walk(player, position, direction, numberOfWalk) {
 function move(player, sum, direction) {
     let playerElement=getPlayerElement(player)
 if(playerElement){
-    console.log(playerElement)
-    console.log(sum)
     playerElement.style.transition = `linear all .5s`
     
     if (sum < 10) {
@@ -644,7 +587,6 @@ if(playerElement){
         let numarr = Array.from(String(sum))
         let n1 = numarr.shift()
         let n2 = numarr.pop()
-        console.log(n1, n2)
 
         if (n1 % 2 != 0) {
 
@@ -690,7 +632,6 @@ function Again(playAgain) {
         resetPosition()
         playagain = false
     }
-    console.log(position1)
 }
 function resetPosition() {
     player1.style.left = `${-70}px`
