@@ -198,7 +198,7 @@ let router=ref(true)
       <Group @onShow="onShowAdd" @onEdit="onShowEdit" @onPlay="gotoGame" />
     </div>
     <div v-show="addGroup">
-      <InputUserInfo @show-play="playShow" @add="addNewGroups" :set-id-edit="editId" :moregroup="editItem" @edit="modifyGroup" :error="errorMes" />
+      <InputUserInfo @add="addNewGroups" :set-id-edit="editId" :moregroup="editItem" @edit="modifyGroup" :error="errorMes" />
     </div>
     <div v-show="showPlay">
       <div class="flex">
