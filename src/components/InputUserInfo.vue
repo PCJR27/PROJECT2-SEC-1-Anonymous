@@ -89,7 +89,7 @@ const props = defineProps({
 const setId = computed(() => props.setIdEdit)
 let errorMes = computed(()=>props.error)
 
-defineEmits(['showPlay', 'add', 'edit'])
+defineEmits(['add', 'edit'])
 
 let editOpen = ref(true)
 function editOrCreate(){
