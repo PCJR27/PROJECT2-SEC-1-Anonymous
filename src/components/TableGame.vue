@@ -206,7 +206,8 @@ function getPlayerElement(player) {
             playerElement = player3;
             break;
         case 'player4':
-            if (!player4) {player4 = p4.value}
+            if (!player4) {player4 = p4.value
+}
             playerElement = player4;
             break;
         default:
@@ -216,17 +217,63 @@ function getPlayerElement(player) {
 }
 function walk(player, position, direction, numberOfWalk) {
     let sum
-        if (position == 'position1') {position1 = position1 + numberOfWalk
-        if (position1 == 1)  {setTimeout(() => {position1 = 38}, 500)}
-        if (position1 == 4)  {setTimeout(() => {position1 = 57}, 500)}
-        if (position1 == 8)  {setTimeout(() => {position1 = 30}, 500)}
-        if (position1 == 21) {setTimeout(() => {position1 = 42}, 500)}
-        if (position1 == 28) {setTimeout(() => {position1 = 70}, 500)}
-        if (position1 == 50) {setTimeout(() => {position1 = 88}, 500)}
-        if (position1 == 32) {setTimeout(() => {position1 = 10}, 500)}
-        if (position1 == 36) {setTimeout(() => {position1 = 15}, 500)}
-        if (position1 == 75) {setTimeout(() => {position1 = 18}, 500)}
-        if (position1 == 80) {setTimeout(() => {position1 = 54}, 500)}
+    if (position == 'position1') {
+        position1 = position1 + numberOfWalk
+       if (position1 == 1) {
+            setTimeout(() => {
+                position1 = 38
+            }, 500)
+        }
+        if (position1 == 4) {
+            setTimeout(() => {
+                position1 = 57
+            }, 500)
+        }
+        if (position1 == 8) {
+            setTimeout(() => {
+                position1 = 30
+            }, 500)
+
+        }
+        if (position1 == 21) {
+            setTimeout(() => {
+                position1 = 42
+            }, 500)
+        }
+        if (position1 == 28) {
+            setTimeout(() => {
+                position1 = 70
+            }, 500)
+
+        }
+        if (position1 == 50) {
+            setTimeout(() => {
+                position1 = 88
+            }, 500)
+        }
+
+   
+        if (position1 == 32) {
+            setTimeout(() => {
+                position1 = 10
+            }, 500)
+        }
+        if (position1 == 36) {
+            setTimeout(() => {
+                position1 = 15
+            }, 500)
+        }
+        if (position1 == 75) {
+            setTimeout(() => {
+                position1 = 18
+            }, 500)
+        }
+        if (position1 == 80) {
+            setTimeout(() => {
+                position1 = 54
+            }, 500)
+        }
+
         sum = position1
     }
     if (position == 'position2') {
