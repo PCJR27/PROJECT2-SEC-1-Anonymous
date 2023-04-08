@@ -4,16 +4,12 @@ import { ref } from 'vue'
 defineEmits(['plays'])
 let diceRef = ref('')
 let randomNum = ref('0')
-
-
 rollDice()
-
 function rollDice(){
     let number =  Math.floor(Math.random() * 6 + 1)
     randomNum.value = number
     return number
 }
-
 function animationRoll(number) {
     setTimeout(() => {
         switch (number) {
@@ -62,7 +58,6 @@ function animationRoll(number) {
 </template>
  
 <style scoped>
-/* General CSS Reset */
 * {
     margin: 0;
     padding: 0;
@@ -70,7 +65,6 @@ function animationRoll(number) {
     outline: 0;
     box-sizing: border-box;
 }
-
 .container {
     display: grid;
     place-items: center;
@@ -79,10 +73,6 @@ function animationRoll(number) {
     background: #AEAEAE;
     box-shadow: 0 0 20px rgba(0, 0, 0, .1);
 }
-
-/* /////////////////////////////////////// */
-
-/* Dice style */
 .dice {
     position: relative;
     width: 100px;
@@ -90,8 +80,6 @@ function animationRoll(number) {
     transform-style: preserve-3d;
     transition: 1s ease;
 }
-
-
 .face {
     position: absolute;
     width: 100px;
@@ -101,7 +89,6 @@ function animationRoll(number) {
     transform-style: preserve-3d;
     background: linear-gradient(145deg, #dddbd8, #fff);
 }
-
 .face::before {
     position: absolute;
     content: '';
@@ -111,7 +98,6 @@ function animationRoll(number) {
     background: #f6f3f0;
     transform: translateZ(-1px);
 }
-
 .face::after {
     position: absolute;
     content: '';
@@ -122,42 +108,33 @@ function animationRoll(number) {
     border-radius: 50%;
     background: #131210;
 }
-
 .front {
     transform: translateZ(50px);
 }
-
 .back {
     transform: rotateX(180deg) translateZ(50px);
 }
-
 .top {
     transform: rotateX(90deg) translateZ(50px);
 }
-
 .bottom {
     transform: rotateX(-90deg) translateZ(50px);
 }
-
 .right {
     transform: rotateY(90deg) translateZ(50px);
 }
-
 .left {
     transform: rotateY(-90deg) translateZ(50px);
 }
-
 .dice {
     transform: rotateX(0deg) rotateY(0deg);
 }
-
 .front::after {
     width: 30px;
     height: 30px;
     background: #f63330;
     margin: -15px 0 0 -15px;
 }
-
 .back::after {
     margin: -35px 0 0 -30px;
     box-shadow: 40px 0 black,
@@ -171,7 +148,6 @@ function animationRoll(number) {
     margin: -30px 0 0 -30px;
     box-shadow: 40px 40px black;
 }
-
 .bottom::after {
     margin: -36px 0 0 -36px;
     box-shadow: 26px 26px black,
@@ -179,22 +155,17 @@ function animationRoll(number) {
         52px 0 black,
         0 52px black;
 }
-
 .right::after {
     margin: -30px 0 0 -30px;
     box-shadow: 40px 0 black,
         0 40px black,
         40px 40px black;
 }
-
 .left::after {
     margin: -35px 0 0 -35px;
     box-shadow: 25px 25px black,
         50px 50px black;
 }
-
-/* /////////////////////////////////////// */
-
 .roll {
     cursor: pointer;
     color: #b33951;
@@ -206,7 +177,6 @@ function animationRoll(number) {
     border: 2px solid #b33951;
     transition: .4s;
 }
-
 .roll:hover {
     color: #fff;
     background: #b33951;

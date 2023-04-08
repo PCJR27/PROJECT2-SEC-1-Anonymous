@@ -13,44 +13,28 @@ onMounted( ()=> {
           player: 1,
             name: "",
             color: ""
-          
         },
         {
           player: 2,
             name: "",
             color: ""
-          
-        
         },
         {
           player: 3,
             name: "",
             color: ""
-          
-        
         },
         {
           player: 4,
             name: "",
             color: ""
-          
-        
         }
-        
       ]
     }
-
-
   }
-
 })
-
-
-
-
 let playerArr = ref([])
 let show = ref(false)
-//edit
 let edit=computed(()=>props.moregroup)
 function createPlayer() {
   if(edit.value!==undefined){
@@ -59,25 +43,16 @@ function createPlayer() {
   playerArr.value = []
     for (let index = 0; index < updateGroup.value.numOfPlayer; index++) {
         playerArr.value.push("Player" + (index + 1))
-
     }
   }
-
-  //Add
 else{
   show.value = true 
   playerArr.value = []
     for (let index = 0; index < updateGroup.value.numOfPlayer; index++) {
         playerArr.value.push("Player" + (index + 1))
-
     }
-    
   }
-
-
-
 }
-
 const updateGroup = ref({})
 const props = defineProps({
   moregroup: {
@@ -98,11 +73,9 @@ function editOrCreate(){
   }
   createPlayer()
 }
-
 watch(setId, editOrCreate)
 </script>
 
- 
 <template>
   <div style="color: #A6ADBB;">
     <div class="h-screen flex flex-col bg-black" id="page2" >

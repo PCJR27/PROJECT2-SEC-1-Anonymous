@@ -6,9 +6,7 @@ let groupLimit = ref(true)
 onMounted(async () => {
   groups.value = await getGroups()
   checkGroup()
-})
-
-      
+})  
 function checkGroup(){
     if (groups.value.length >= 4){
       groupLimit.value = false
@@ -16,8 +14,6 @@ function checkGroup(){
       groupLimit.value = true
     }
   }
-
-
 const deleteGroup= async (deleteId)=>{
  try{
 const res = await fetch(`http://localhost:3000/groups/${deleteId}`,{
@@ -31,7 +27,6 @@ if(res.ok){
 }else{
   throw new Error('Error, cannot delete data!!')
 }
-
  }
  catch (err){
 console.log(err)

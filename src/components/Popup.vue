@@ -31,9 +31,7 @@ function popupControl(){
         closeWinner.value =  true
     }
 }
-watch (popupStatus,popupControl)
-watch (popupWinner,popupControl)
-
+watch ([popupWinner,popupStatus],popupControl)
 defineEmits(['playAgain'])
 
 function goToHome(){

@@ -11,7 +11,6 @@ let addGroup = ref(false)
 let showPlay = ref(false)
 let numOfPlayer = ref()
 let setIdEdit = ref()
-
 const onShowAdd = (but, set) => {
   setIdEdit.value = set
   if (but === 'add') {
@@ -19,7 +18,6 @@ const onShowAdd = (but, set) => {
     groupShow.value = set
   }
 }
-
 const editItem = ref()
 const editId=ref()
 const onShowEdit = (item, id,set) => {
@@ -27,47 +25,31 @@ const onShowEdit = (item, id,set) => {
     groupShow.value = !set
     editItem.value = item
     editId.value=id
-
 }
-
-
-const playShow = (show, num) => {
-  showPlay.value = show
-  numOfPlayer.value = num
-}
-
 const showGroup = (show) => {
   groupShow.value = show
   router.value = !show
-
 }
-
 let addCall=ref()
 let errorMes =ref()
 let finish=ref()
 let addNewGroups = (async (newGroup) => {
-
   if (newGroup.numOfPlayer !== null || newGroup.numOfPlayer  !== undefined) {
-for (let index =0;index<newGroup.numOfPlayer;index++){
-    if (newGroup.groupName=='') {
-    errorMes.value = 'Enter Your Group Name.'
-    return
-  }
-  else if (newGroup.member[index].name=='') {
-    errorMes.value = 'Enter Your Name'
-    return
-  }
-    else if (newGroup.member[index].color=='') {
-    errorMes.value = 'Enter Your Color'
-    return
-  }
-
-
-
-} 
-finish.value=true
-}
-
+    for (let index =0;index<newGroup.numOfPlayer;index++){
+        if (newGroup.groupName=='') {
+        errorMes.value = 'Enter Your Group Name.'
+        return
+    }
+    else if (newGroup.member[index].name=='') {
+      errorMes.value = 'Enter Your Name'
+      return
+    }
+      else if (newGroup.member[index].color=='') {
+      errorMes.value = 'Enter Your Color'
+      return
+    }
+} finish.value=true
+}     
 if(finish.value===true) {
     addCall.value='add'
   try {
@@ -76,14 +58,12 @@ if(finish.value===true) {
       headers: {
         'content-type': 'application/json'
       },
-
       body:JSON.stringify({
         groupName: newGroup.groupName,
         numOfPlayer: newGroup.numOfPlayer,
         member: newGroup.member
       })
     })
-
     if (res.status === 201) {
       const addNewGroups = await res.json()
       groups.value.push(addNewGroups)
@@ -92,28 +72,20 @@ if(finish.value===true) {
       throw Error('cannot add!!')
     }
   }
-  
   catch (err) {
     console.log(err)
   }
-
   showPlay.value = true
   addGroup.value = false
 }
-
 else {
       showPlay.value = false
       addGroup.value = true
-
   }
-  
-  
 })
 defineEmits(['playerControl'])
-
 let setEdit=ref()
 let modifyGroup = (async (edit,setId) => {
-
 if (edit.numOfPlayer !== null || edit.numOfPlayer  !== undefined) {
 for (let index =0;index<edit.numOfPlayer;index++){
     if (edit.groupName=='') {
@@ -128,11 +100,7 @@ for (let index =0;index<edit.numOfPlayer;index++){
     errorMes.value = 'Enter Your Color'
     return
   }
-
-
-
-} 
-finish.value=true
+} finish.value=true
 }
 if(finish.value==true){
   showPlay.value = true
@@ -150,7 +118,6 @@ if(finish.value==true){
         member: edit.member
       })
     })
- 
     if (res.status === 200) {
       const modify = await res.json()
       groups.value = groups.value.map((group) => {
@@ -162,30 +129,25 @@ if(finish.value==true){
       })
       edit.value = undefined
     }
-  
     else {
       throw Error('cannot add!!')
     }
   }
-
   catch (err) {
     console.log(err)
   }
-  }
+}
 else {
-
   showPlay.value = false
   addGroup.value = true
-
 }
 })
-let idToPlay=ref()
-const gotoGame=(id,set)=>{
-idToPlay.value=id
-showPlay.value=set
-groupShow.value=!set
+  let idToPlay=ref()
+  const gotoGame=(id,set)=>{
+  idToPlay.value=id
+  showPlay.value=set
+  groupShow.value=!set
 }
-
 let router=ref(true)
 </script>
  

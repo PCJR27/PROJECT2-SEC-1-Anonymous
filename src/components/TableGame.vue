@@ -4,13 +4,10 @@ import Dice from './Dice.vue'
 import Popup from './Popup.vue'
 import { getGroups } from './../composable/getGroups.js'
 const userInfo = ref([])
-
-
 const props = defineProps({
     gId: { 
         type:Number,
         default:null
-
     },
     setIdEdit:{
         type:Number,
@@ -20,12 +17,10 @@ const props = defineProps({
         type:String,
         default:null
     }
-
 })
 let editId = computed(() => props.setIdEdit)
 let groupId = computed(()=> props.gId)
 let addSet=computed(()=>props.setAdd)
-
 let singleGroup
 let playerNum = ref(Number)
 let defaultColor = "#aeaeae"
@@ -37,7 +32,6 @@ let color4 = ref('')
 const getUserInfo = async () => {   
     userInfo.value = await getGroups()
 } 
-
 async function  checkControler(){
     await getUserInfo()
     let id
@@ -51,47 +45,34 @@ async function  checkControler(){
     singleGroup = userInfo.value.filter((i) => i.id === id)
     setUserInfo() 
 }
-
-
 function setUserInfo(){
     for (let item of singleGroup){
     color1.value = item.member[0].color
     color2.value = item.member[1].color
     color3.value = item.member[2].color
     color4.value = item.member[3].color
-
-
-
     playerNum.value = item.numOfPlayer
-
-    playerName[0] = (item.member[0].name) 
-    playerName[1] = (item.member[1].name) 
-    playerName[2] = (item.member[2].name) 
-    playerName[3] = (item.member[3].name) 
+    playerName[0] = item.member[0].name
+    playerName[1] = item.member[1].name 
+    playerName[2] = item.member[2].name 
+    playerName[3] = item.member[3].name 
   } 
 }
-watch(groupId,checkControler)
-watch(addSet,checkControler)
-watch(editId,checkControler)
+watch([groupId,addSet,editId],checkControler)
 
 let whoTurn = ref('')
-
 let winnerIs = ref('')
 const showPlay=(rollDice,randomNum,animationRoll)=>{
     random.value=randomNum
     rollDice()
     animationRoll(randomNum)
     callPlay()
-    
 }
-
 let randomNumber = computed(() => random.value)
 let random =ref(0)
 let twoUser = ref(false)
 let threeUser = ref(false)
 let fourUser = ref(false)
-
-
 function userControl() {
   if (playerNum.value == 2) {
     twoUser.value = true
@@ -111,20 +92,17 @@ function userControl() {
     fourUser.value = false
   }
 }
-
 watch(playerNum, userControl)
 let p1 = ref('')
 let p2 = ref('')
 let p3 = ref('')
 let p4 = ref('')
-
 let position1 = 0
 let position2 = 0
 let position3 = 0
 let position4 = 0
 let turnMessage = ref('')
 let turn = 1
-
 let player1 = null;
 let player2 = null;
 let player3 = null;
@@ -212,35 +190,23 @@ function callPlay() {
     }
     turn = turn + 1
 }
-
-
-// it is get element by id.
 function getPlayerElement(player) {
     let playerElement = null;
     switch(player) {
         case 'player1':
-            //ถ้า player เป็น null ให้ทำ....
-            if (!player1) {
-                player1 = p1.value;
-            }
+            if (!player1) {player1 = p1.value;}
             playerElement = player1;
             break;
         case 'player2':
-            if (!player2) {
-                player2 = p2.value;
-            }
+            if (!player2) {player2 = p2.value;}
             playerElement = player2;
             break;
         case 'player3':
-            if (!player3) {
-                player3 = p3.value
-            }
+            if (!player3) {player3 = p3.value}
             playerElement = player3;
             break;
         case 'player4':
-            if (!player4) {
-                player4 = p4.value
-            }
+            if (!player4) {player4 = p4.value}
             playerElement = player4;
             break;
         default:
@@ -250,63 +216,17 @@ function getPlayerElement(player) {
 }
 function walk(player, position, direction, numberOfWalk) {
     let sum
-    if (position == 'position1') {
-        position1 = position1 + numberOfWalk
-       if (position1 == 1) {
-            setTimeout(() => {
-                position1 = 38
-            }, 500)
-        }
-        if (position1 == 4) {
-            setTimeout(() => {
-                position1 = 57
-            }, 500)
-        }
-        if (position1 == 8) {
-            setTimeout(() => {
-                position1 = 30
-            }, 500)
-
-        }
-        if (position1 == 21) {
-            setTimeout(() => {
-                position1 = 42
-            }, 500)
-        }
-        if (position1 == 28) {
-            setTimeout(() => {
-                position1 = 70
-            }, 500)
-
-        }
-        if (position1 == 50) {
-            setTimeout(() => {
-                position1 = 88
-            }, 500)
-        }
-
-   
-        if (position1 == 32) {
-            setTimeout(() => {
-                position1 = 10
-            }, 500)
-        }
-        if (position1 == 36) {
-            setTimeout(() => {
-                position1 = 15
-            }, 500)
-        }
-        if (position1 == 75) {
-            setTimeout(() => {
-                position1 = 18
-            }, 500)
-        }
-        if (position1 == 80) {
-            setTimeout(() => {
-                position1 = 54
-            }, 500)
-        }
-
+        if (position == 'position1') {position1 = position1 + numberOfWalk
+        if (position1 == 1)  {setTimeout(() => {position1 = 38}, 500)}
+        if (position1 == 4)  {setTimeout(() => {position1 = 57}, 500)}
+        if (position1 == 8)  {setTimeout(() => {position1 = 30}, 500)}
+        if (position1 == 21) {setTimeout(() => {position1 = 42}, 500)}
+        if (position1 == 28) {setTimeout(() => {position1 = 70}, 500)}
+        if (position1 == 50) {setTimeout(() => {position1 = 88}, 500)}
+        if (position1 == 32) {setTimeout(() => {position1 = 10}, 500)}
+        if (position1 == 36) {setTimeout(() => {position1 = 15}, 500)}
+        if (position1 == 75) {setTimeout(() => {position1 = 18}, 500)}
+        if (position1 == 80) {setTimeout(() => {position1 = 54}, 500)}
         sum = position1
     }
     if (position == 'position2') {
